@@ -1,0 +1,37 @@
+[
+    {
+        "name": "CHN-Room B1 Sydney",
+        "occupancy": 10,
+        "utilities": ["Wifi", "Monitor", "Whiteboard", "Projector"]
+    },
+    {
+        "name": "CHN-Room B1 Training 1",
+        "occupancy": 20,
+        "utilities": ["Wifi", "Whiteboard"]
+    },
+    {
+        "name": "CHN-Room B1 Training 2",
+        "occupancy": 15,
+        "utilities": ["Wifi", "Projector"]
+    },
+    {
+        "name": "CHN-Room B1 Training 3",
+        "occupancy": 25,
+        "utilities": ["Wifi", "Projector"]
+    },
+    {
+        "name": "CHN-Room Tanjore",
+        "occupancy": 6,
+        "utilities": ["Wifi", "Projector", "Monitor", "Whiteboard"]
+    },
+    {
+        "name": "CHN-Room Austin",
+        "occupancy": 6,
+        "utilities": ["Wifi", "Projector", "Monitor", "Whiteboard"]
+    },
+    {
+        "name": "CHN-Room Chennai",
+        "occupancy": 6,
+        "utilities": ["Wifi", "Projector", "Monitor"]
+    }
+]

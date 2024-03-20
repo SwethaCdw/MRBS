@@ -1,0 +1,36 @@
+@import '../../constants/mixins/mixins.scss';
+@import '../../constants/colors/colors.scss';
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    @include center-content;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: $background-color;
+    .container{
+        width: 100%;
+        #meetingRoomsList {
+            list-style: none;
+            padding: 0;
+            @include center-content;
+            flex-direction: column;
+            width: 100%;
+            cursor: pointer;
+            li{
+                width: 80%;
+                background-color: white;
+                border-radius: 5px;
+                margin-bottom: 10px;
+                padding: 10px;
+                text-align: center;
+                color: $primary-color;
+                a{
+                    color: $primary-color;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+   
+}

@@ -1,0 +1,17 @@
+@import '../colors/colors.scss';
+
+@mixin center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin button-style {
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: $primary-color;
+  color: $text-color;
+  box-shadow: 0 2px 4px $primary-color;
+}

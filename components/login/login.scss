@@ -1,0 +1,66 @@
+@import '../../constants/mixins/mixins.scss';
+@import '../../constants/colors/colors.scss';
+body {
+    margin: 0;
+    padding: 0;
+    @include center-content;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: $background-color;
+    button {
+        @include button-style;
+    }
+
+
+    #view-rooms {
+        margin-top: 20px;
+    }
+
+
+    .container {
+        width: 50%;
+        height: 250px;
+        background-color: #fdfeff;
+        @include center-content;
+        flex-direction: column;
+        
+        
+
+        .form-group{
+            padding: 10px 0;
+
+            input {
+                width: 40vw;
+                padding: 10px;
+                border: none;
+                background-color: transparent;
+                border-bottom: 1px solid $primary-color;
+                transition: box-shadow 0.3s;
+            }
+    
+            input:focus {
+                box-shadow: 0 0 10px #19d4ca;
+            }
+            
+            input::placeholder{
+                color: $primary-color;
+            }
+        }
+        button[type="submit"] {
+            margin-top: 20px;
+            width: 100%;
+        }
+    
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+       
+        
+        .error{
+            color: red;
+        }
+    }
+    
+}
+
+  
