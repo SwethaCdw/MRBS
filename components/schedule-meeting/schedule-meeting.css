@@ -1,58 +1,74 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
+  width: 100%;
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  background-color: #f8f1f1;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
-
-.container {
-  background-color: #fff;
-  border-radius: 8px;
+body .container {
+  font-family: sans-serif;
+  font-size: 13px;
+  width: 80%;
+  margin: 0 auto;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
 }
-
-.container h2 {
-  margin-top: 0;
+body .container h2 {
+  text-align: center;
+  margin-bottom: 20px;
 }
-
-form {
+body .container form div {
+  margin-bottom: 15px;
+}
+body .container form .confidential-meeting {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  flex-direction: row;
 }
-
-label {
-  margin-bottom: 8px;
+body .container form .confidential-meeting label {
+  margin: 0;
+  color: #437874;
 }
-
-input[type=text],
-input[type=date],
-input[type=time],
-select {
+body .container form input[type=text],
+body .container form input[type=date],
+body .container form input[type=time],
+body .container form select {
+  width: 100%;
   padding: 8px;
-  margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 90%;
-}
-
-input[type=checkbox] {
-  margin-right: 5px;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #4caf50;
-  color: white;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  border-bottom: 1px solid #437874;
+  box-sizing: border-box;
+  color: #437874;
 }
-
-button:hover {
-  background-color: #45a049;
+body .container form input::-moz-placeholder {
+  color: #437874;
+}
+body .container form input::placeholder {
+  color: #437874;
+}
+body .container form input[type=checkbox] {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+body .container form input[type=checkbox]:checked {
+  background-color: #437874;
+}
+body .container form button[type=submit] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #437874;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+body .container form button[type=submit]:hover {
+  background-color: green;
 }/*# sourceMappingURL=schedule-meeting.css.map */

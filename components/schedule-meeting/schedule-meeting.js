@@ -1,10 +1,9 @@
 import { meetingRooms } from "../../services/meeting-rooms-service.js";
+import { getUserData } from "../../services/user-service.js";
 import { getItemFromLocalStorage } from "../../utils/local-storage-utils.js";
 
 const meetingRoomsDropdown = document.getElementById("meetingRoomsDropdown");
-const username = getItemFromLocalStorage('username');
-const meetingOwner = document.getElementById('meetingOwner');
-meetingOwner.value = username;
+
 
 meetingRooms.forEach(function(room) {
   const option = document.createElement("option");
@@ -13,6 +12,19 @@ meetingRooms.forEach(function(room) {
 
   meetingRoomsDropdown.appendChild(option);
 });
+
+const organizerDropdown = document.getElementById("organizerDropdown");
+const userData = getUserData();
+
+userData.forEach(function(user) {
+  const option = document.createElement("option");
+  option.value = user.username;
+  option.textContent = user.username;
+
+  organizerDropdown.appendChild(option);
+});
+
+
 
 const form = document.getElementById('meetingForm');
 
@@ -23,6 +35,12 @@ form.addEventListener('submit', function(event) {
   const meetingDate = form.elements.meetingDate.value;
   const fromTime = form.elements.fromTime.value;
   const toTime = form.elements.toTime.value;
+
+  if (fromTime >= toTime) {
+    alert('To time must be greater than from time.');
+    event.preventDefault();
+  }
+  
   const meetingRoom = meetingRoomsDropdown.value;
   const isConfidential = form.elements.confidential.checked;
 
@@ -41,5 +59,5 @@ form.addEventListener('submit', function(event) {
   localStorage.setItem('meetings', JSON.stringify(meetings));
   alert('Meeting data stored successfully!');
   form.reset();
-  window.location.href = '../meeting-rooms/meeting-rooms.html';
+  window.location.href = '../meeting-room-list/meeting-rooms.html';
 });

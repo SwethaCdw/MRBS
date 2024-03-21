@@ -6,6 +6,7 @@ body {
     padding: 0;
     min-height: 100vh;
     background-color: $background-color;
+    box-sizing: border-box;
     .meeting-status-container{
         position: relative;
         @include center-content;
@@ -48,9 +49,26 @@ body {
         flex: 1 1 50%;
         background-color: #8d0000;
         color: white;
+
     }
     .room-details{
         width: 100%;
         flex: 1 1 10%;
+        #room-amenities{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            div{
+                @include circle(50px, white);
+                i {
+                    height: 100%;
+                    @include center-content;
+                    color: #437874;
+                }
+            }
+          
+        }
+
     }
 }

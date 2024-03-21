@@ -15,3 +15,10 @@
   color: $text-color;
   box-shadow: 0 2px 4px $primary-color;
 }
+
+@mixin circle($size, $color) {
+  width: $size; 
+  height: $size; 
+  background-color: $color;
+  border-radius: 50%;
+}

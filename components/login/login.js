@@ -1,6 +1,7 @@
 import { getUserData } from "../../services/user-service.js";
 import { getItemFromLocalStorage, removeItemFromLocalStorage, setItemInLocalStorage } from '../../utils/local-storage-utils.js';
-import { LOCAL_STORAGE_KEYS } from '../../constants/common-constants.js'
+import { LOCAL_STORAGE_KEYS } from '../../constants/common-constants.js';
+import { validateEmail } from '../../utils/validation-utils.js';
 
 
 let isLoggedIn;
@@ -40,6 +41,6 @@ const isValidUser = (username, password) => {
 const viewRooms = document.getElementById("view-rooms");
 
 viewRooms.addEventListener("click", function() {
-    window.location.href = '../meeting-rooms/meeting-rooms.html';
+    window.location.href = '../meeting-room-list/meeting-rooms.html';
   });
 

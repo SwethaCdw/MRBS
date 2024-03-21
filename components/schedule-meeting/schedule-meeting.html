@@ -8,36 +8,32 @@
 </head>
 <body>
 <div class="container">
-  <h2>Meeting Form</h2>
   <form id="meetingForm">
     <div>
-        <label for="meetingOwner">Meeting Owner:</label>
-        <input type="text" id="meetingOwner" name="meetingOwner" required>
-      </div>
-    <div>
-      <label for="meetingName">Meeting Name:</label>
-      <input type="text" id="meetingName" name="meetingName" required>
+        <select aria-placeholder="Select meeting room" id="meetingRoomsDropdown" required>
+            <option value="" disabled selected>Select a room</option>
+        </select>
     </div>
     <div>
-      <label for="meetingDate">Date:</label>
+        <input type="text" id="meetingName" name="meetingName" placeholder="Enter meeting name" required>
+    </div>
+    <div class="confidential-meeting">
+        <input type="checkbox" id="confidential" name="confidential">
+        <label for="confidential">Show Meeting Name</label>
+    </div>
+    <div>
+        <select aria-placeholder="Select an organize" id="organizerDropdown" required>
+            <option value="" disabled selected>Select an organizer</option>
+        </select>
+    </div>
+    <div>
       <input type="date" id="meetingDate" name="meetingDate" required>
     </div>
     <div>
-      <label for="fromTime">From:</label>
-      <input type="time" id="fromTime" name="fromTime" required>
-      <label for="toTime">To:</label>
-      <input type="time" id="toTime" name="toTime" required>
+      <input type="time" id="fromTime" name="fromTime" placeholder="Start Time" required>
+      <input type="time" id="toTime" name="toTime" placeholder="End Time" required>
     </div>
-    <div>
-      <label for="meetingRoom">Meeting Room:</label>
-      <select id="meetingRoomsDropdown" required>
-      </select>
-    </div>
-    <div>
-      <input type="checkbox" id="confidential" name="confidential">
-      <label for="confidential">Confidential Meeting</label>
-    </div>
-    <button type="submit">Submit</button>
+    <button type="submit">Book Now</button>
   </form>
 </div>
 <script type="module" src="schedule-meeting.js"></script>
