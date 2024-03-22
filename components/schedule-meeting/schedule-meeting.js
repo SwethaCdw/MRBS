@@ -1,9 +1,17 @@
 import { meetingRooms } from "../../services/meeting-rooms-service.js";
 import { getUserData } from "../../services/user-service.js";
+import { initializeUserAuth } from "../../utils/common-utils.js";
 import { getItemFromLocalStorage } from "../../utils/local-storage-utils.js";
+import { headerComponent } from "../header/header.js";
 
+
+const {isLoggedIn} = initializeUserAuth();
+  if(isLoggedIn){
+      let header = document.getElementById('header');
+      header.appendChild(headerComponent());
+      header.style.padding = '10px';
+  }
 const meetingRoomsDropdown = document.getElementById("meetingRoomsDropdown");
-
 
 meetingRooms.forEach(function(room) {
   const option = document.createElement("option");
@@ -43,13 +51,15 @@ form.addEventListener('submit', function(event) {
   
   const meetingRoom = meetingRoomsDropdown.value;
   const isConfidential = form.elements.confidential.checked;
-
+  const meetingOrganizer = form.elements.organizerDropdown.value;
+ 
   const meetingData = {
     name: meetingName,
     date: meetingDate,
     from: fromTime,
     to: toTime,
     room: meetingRoom,
+    organizer: meetingOrganizer,
     confidential: isConfidential
   };
 

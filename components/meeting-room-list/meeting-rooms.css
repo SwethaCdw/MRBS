@@ -1,28 +1,27 @@
-body {
+.container {
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
   width: 100%;
-  margin: 0;
-  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: 100vh;
-  background-color: #f8f1f1;
 }
-body .container {
-  width: 100%;
-}
-body .container #meetingRoomsList {
+.container #meetingRoomsList {
   list-style: none;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  background-color: #f8f1f1;
+  height: calc(100vh - 70px);
   flex-direction: column;
   width: 100%;
   cursor: pointer;
 }
-body .container #meetingRoomsList li {
+.container #meetingRoomsList li {
   width: 80%;
   background-color: white;
   border-radius: 5px;
@@ -31,7 +30,7 @@ body .container #meetingRoomsList li {
   text-align: center;
   color: #3f7776;
 }
-body .container #meetingRoomsList li a {
+.container #meetingRoomsList li a {
   color: #3f7776;
   text-decoration: none;
 }/*# sourceMappingURL=meeting-rooms.css.map */

@@ -1,10 +1,17 @@
 import { meetingRooms } from '../../services/meeting-rooms-service.js';
-import {getParameterByName} from '../../utils/common-utils.js';
+import {getParameterByName, initializeUserAuth} from '../../utils/common-utils.js';
 import { ICON_MAP } from '../../constants/common-constants.js';
+import { headerComponent } from '../header/header.js';
 
 const getRoomAmenities = (meetingRooms, roomName) => meetingRooms.find(room => room.name === roomName);
 
 const initializeMeetingStatus = () => {
+    const {isLoggedIn} = initializeUserAuth();
+    if(isLoggedIn){
+        let header = document.getElementById('header');
+        header.appendChild(headerComponent());
+        header.style.padding = '10px';
+    }
 
     const meetings = JSON.parse(localStorage.getItem('meetings'));
 

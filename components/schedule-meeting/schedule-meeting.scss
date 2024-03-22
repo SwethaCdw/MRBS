@@ -1,28 +1,27 @@
 @import '../../constants/mixins/mixins.scss';
 @import '../../constants/colors/colors.scss';
+@import '../../constants/variables/variables.scss';
 body{
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    background-color: $background-color;
-    @include center-content;
-    .container {
-        font-family: sans-serif;
-        font-size: 13px;
-        width: 80%;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: white;
-        border-radius: 5px;
-        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1); 
+    .schedule-meeting-container {
+        height: $header-height;
+        background-color: $background-color;
+        @include border-radius;
+        @include center-content;
+      
         h2 {
           text-align: center;
           margin-bottom: 20px;
         }
       
         form {
-      
+          font-family: sans-serif;
+          font-size: 13px;
+          width: 80%;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: white;
+          border-radius: 5px;
+          box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1); 
           div {
             margin-bottom: 15px;
           }
@@ -57,12 +56,32 @@ body{
           input[type="checkbox"] {
             margin-right: 5px;
             vertical-align: middle;
+            accent-color: $primary-color;
           }
 
           input[type="checkbox"]:checked {
             background-color: #437874;
           }
-      
+
+          #fromTime:before {
+            content: 'Start Time';
+            color: $primary-color;
+            position: absolute;
+            background: #fff;
+            height: 18px;
+        }
+        #toTime:before {
+          content: 'To Time';
+          color: $primary-color;
+          position: absolute;
+          background: #fff;
+          height: 18px;
+      }
+      .time-input{
+        margin: 15px auto;
+        width: 40%;
+      }
+        
           button[type="submit"] {
             display: block;
             width: 100%;

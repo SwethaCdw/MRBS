@@ -1,36 +1,43 @@
 [
     {
         "name": "CHN-Room B1 Sydney",
+        "image": "https://lh3.googleusercontent.com/p/AF1QipO5Ox2pN73OmIhRZlUL8MoDp-cjitO19KeRim_p=s1360-w1360-h1020",
         "occupancy": 10,
         "utilities": ["Wifi", "Monitor", "Whiteboard"]
     },
     {
         "name": "CHN-Room B1 Training 1",
+        "image" : "https://lh3.googleusercontent.com/p/AF1QipO9uOtB1NeZOrulV6ZhD_95NtTLZyIZUj189yMI=s1360-w1360-h1020",
         "occupancy": 20,
         "utilities": ["Wifi", "Whiteboard"]
     },
     {
         "name": "CHN-Room B1 Training 2",
+        "image" : "https://img.freepik.com/premium-photo/business-meeting-room_105762-1727.jpg",
         "occupancy": 15,
         "utilities": ["Wifi"]
     },
     {
         "name": "CHN-Room B1 Training 3",
+        "image" : "https://lh3.googleusercontent.com/p/AF1QipNflg_8gdLAu56IE6QH-qQKaHjd1VGL5jhkt0vy=s1360-w1360-h1020",
         "occupancy": 25,
         "utilities": ["Wifi", "Monitor"]
     },
     {
         "name": "CHN-Room Tanjore",
+        "image" : "https://lh3.googleusercontent.com/p/AF1QipPmCcgmqJYnhmEfrFcCUpmcjSXQXfml3L6SvyAJ=s1360-w1360-h1020",
         "occupancy": 6,
         "utilities": ["Wifi", "Monitor", "Whiteboard"]
     },
     {
         "name": "CHN-Room Austin",
+        "image" : "https://img.freepik.com/premium-photo/front-view-blank-white-poster-black-frame-light-wall-modern-meeting-room-with-empty-wooden-table-surrounded-by-black-white-chairs-city-view-from-big-window-3d-rendering-mock-up_688884-70.jpg",
         "occupancy": 6,
         "utilities": ["Wifi", "Monitor", "Whiteboard"]
     },
     {
         "name": "CHN-Room Chennai",
+        "image" : "https://lh3.googleusercontent.com/p/AF1QipPpNQaDqX7B38u3mN0p6Pqxjg7u-z-U7WVrza2w=s1360-w1360-h1020",
         "occupancy": 6,
         "utilities": ["Wifi", "Whiteboard", "Monitor"]
     }

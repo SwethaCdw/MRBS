@@ -7,11 +7,13 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background-color: $background-color;
+    #logo{
+        width: 150px;
+        padding-bottom: 20px;
+    }
     button {
         @include button-style;
     }
-
-
     #view-rooms {
         margin-top: 20px;
     }

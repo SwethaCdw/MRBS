@@ -9,3 +9,11 @@ export const ICON_MAP = {
     'Whiteboard': 'fa-chalkboard-user',
     'Monitor': 'fa-desktop'
 }
+
+export const MEETING_INFO_ICON = {
+    'organizer' : 'fa-user',
+    'room' : 'fa-location-dot',
+    'time' : 'fa-clock'
+}
+
+export const LOGO = "https://github.com/SwethaCdw/image/blob/main/logo%201.png?raw=true";

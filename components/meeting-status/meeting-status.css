@@ -1,25 +1,20 @@
-body {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  background-color: #f8f1f1;
-  box-sizing: border-box;
-}
-body .meeting-status-container {
+.meeting-status-container {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
   flex-direction: column;
   width: 100%;
   height: 100vh;
 }
-body #upcoming-meetings {
+
+#upcoming-meetings {
   width: 100%;
   flex: 1 1 40%;
 }
-body #upcoming-meetings div {
+#upcoming-meetings div {
   list-style: none;
   padding: 0;
   display: flex;
@@ -29,7 +24,7 @@ body #upcoming-meetings div {
   width: 100%;
   cursor: pointer;
 }
-body #upcoming-meetings div ul {
+#upcoming-meetings div ul {
   list-style: none;
   width: 80%;
   background-color: white;
@@ -39,7 +34,7 @@ body #upcoming-meetings div ul {
   color: #3f7776;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-body #upcoming-meetings #book-button {
+#upcoming-meetings #book-button {
   border: none;
   border-radius: 4px;
   padding: 10px 20px;
@@ -51,7 +46,8 @@ body #upcoming-meetings #book-button {
   bottom: 10px;
   right: 10px;
 }
-body #current-meeting {
+
+#current-meeting {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,23 +56,24 @@ body #current-meeting {
   background-color: #8d0000;
   color: white;
 }
-body .room-details {
+
+.room-details {
   width: 100%;
   flex: 1 1 10%;
 }
-body .room-details #room-amenities {
+.room-details #room-amenities {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-body .room-details #room-amenities div {
+.room-details #room-amenities div {
   width: 50px;
   height: 50px;
   background-color: white;
   border-radius: 50%;
 }
-body .room-details #room-amenities div i {
+.room-details #room-amenities div i {
   height: 100%;
   display: flex;
   justify-content: center;

@@ -22,3 +22,8 @@
   background-color: $color;
   border-radius: 50%;
 }
+
+@mixin border-radius {
+  border-top-left-radius: 50px; 
+  border-top-right-radius: 50px; 
+}

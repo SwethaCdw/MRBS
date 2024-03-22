@@ -4,10 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Meeting Form</title>
+<link rel="stylesheet" href="../../global-styles.css">
 <link rel="stylesheet" href="schedule-meeting.css">
 </head>
 <body>
-<div class="container">
+  <header id="header"></header>
+<div class="schedule-meeting-container">
   <form id="meetingForm">
     <div>
         <select aria-placeholder="Select meeting room" id="meetingRoomsDropdown" required>
@@ -22,16 +24,16 @@
         <label for="confidential">Show Meeting Name</label>
     </div>
     <div>
-        <select aria-placeholder="Select an organize" id="organizerDropdown" required>
+        <select aria-placeholder="Select an organizer" id="organizerDropdown" required>
             <option value="" disabled selected>Select an organizer</option>
         </select>
     </div>
     <div>
       <input type="date" id="meetingDate" name="meetingDate" required>
     </div>
-    <div>
-      <input type="time" id="fromTime" name="fromTime" placeholder="Start Time" required>
-      <input type="time" id="toTime" name="toTime" placeholder="End Time" required>
+    <div class="time-input">
+      <input type="time" id="fromTime" name="fromTime" required>
+      <input type="time" id="toTime" name="toTime" required>
     </div>
     <button type="submit">Book Now</button>
   </form>

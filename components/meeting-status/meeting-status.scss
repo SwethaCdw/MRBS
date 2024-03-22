@@ -1,15 +1,9 @@
 @import '../../constants/mixins/mixins.scss';
 @import '../../constants/colors/colors.scss';
-body {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    background-color: $background-color;
-    box-sizing: border-box;
     .meeting-status-container{
         position: relative;
         @include center-content;
+        @include border-radius;
         flex-direction: column;
         width: 100%;
         height: 100vh;
@@ -71,4 +65,3 @@ body {
         }
 
     }
-}
