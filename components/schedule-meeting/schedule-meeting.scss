@@ -1,6 +1,7 @@
-@import '../../constants/mixins/mixins.scss';
-@import '../../constants/colors/colors.scss';
-@import '../../constants/variables/variables.scss';
+@import '../../styles/mixins/mixins.scss';
+@import '../../styles/colors/colors.scss';
+@import '../../styles/variables/variables.scss';
+
 .schedule-meeting-container {
     height: $header-height;
     background-color: $background-color;
@@ -14,7 +15,6 @@
   
     form {
       font-size: $font-size;
-      width: 80%;
       margin: 0 auto;
       padding: 20px;
       background-color: $form-background;
@@ -59,8 +59,16 @@
 
 
     .time-input{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin: 15px auto;
-      width: 40%;
+      label{
+        width: 200px;
+      }
+      input{
+        width: 80%;
+      }
     }
     
       button[type="submit"] {
@@ -70,3 +78,24 @@
     }
   }
 
+  @media screen and (min-width: ($mobile-device-width + 1)) {
+    form {
+      width: 500px;
+      .time-input {
+        flex-direction: row;
+        gap: 10px;
+      }
+    }
+   
+}
+
+@media screen and (max-width: $mobile-device-width) {
+    form {
+      width: 300px;
+      .time-input {
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+   
+}

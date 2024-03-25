@@ -71,7 +71,7 @@ body .dashboard-container #meeting-rooms .meeting-room-card .image-container .ro
   border-radius: 5px;
 }
 body .dashboard-container #meeting-rooms .meeting-room-card .image-container .room-status-container .text-overlay {
-  font-size: 12px;
+  font-size: 14px;
 }
 body .dashboard-container #meeting-rooms .meeting-room-card .image-container .room-status-container .circle {
   width: 7px;

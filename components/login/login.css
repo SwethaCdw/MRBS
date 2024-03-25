@@ -18,17 +18,20 @@ body main .form-container {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 50%;
   height: 100%;
   padding: 30px;
   background-color: #fdfeff;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
 }
-body main .form-container .form-group {
-  padding: 10px 0;
+body main .form-container #loginForm {
+  width: 100%;
 }
-body main .form-container .form-group input {
-  width: 40vw;
+body main .form-container #loginForm .form-group {
+  padding: 10px 0;
+  width: 100%;
+}
+body main .form-container #loginForm .form-group input {
+  width: 100%;
 }
 body main button[type=submit] {
   width: 100%;
@@ -42,4 +45,18 @@ body main button[type=submit]:disabled {
   cursor: not-allowed;
   opacity: 0.6;
   pointer-events: none;
+}
+
+@media screen and (min-width: 421px) {
+  .form-container {
+    width: 400px;
+  }
+  #loginForm {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 420px) {
+  .form-container {
+    width: 300px;
+  }
 }/*# sourceMappingURL=login.css.map */

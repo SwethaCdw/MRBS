@@ -1,6 +1,6 @@
-@import '../../constants/mixins/mixins.scss';
-@import '../../constants/colors/colors.scss';
-@import '../../constants/variables/variables.scss';
+@import '../../styles/mixins/mixins.scss';
+@import '../../styles/colors/colors.scss';
+@import '../../styles/variables/variables.scss';
 
 body {
     main{
@@ -21,19 +21,20 @@ body {
         .form-container {
             @include center-content;
             flex-direction: column;
-            width: 50%;
             height: 100%;
             padding: 30px;
             background-color: $form-background;
             box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1); 
-    
-            .form-group{
-                padding: 10px 0;
-    
-                input {
-                    width: 40vw;
+            #loginForm{
+                width: 100%;
+                .form-group{
+                    padding: 10px 0;
+                    width: 100%;
+        
+                    input {
+                        width: 100%;
+                    }
                 }
-               
             }
         }
         button {
@@ -53,3 +54,20 @@ body {
     }
 }
 
+@media screen and (min-width: ($mobile-device-width + 1)) {
+    .form-container {
+        width: 400px;
+        }
+    #loginForm{
+        width: 100%;
+       
+    }
+   
+}
+
+@media screen and (max-width: $mobile-device-width) {
+    .form-container {
+        width: 300px;
+        }
+   
+}
