@@ -1,15 +1,5 @@
-.container {
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.container #meetingRoomsList {
+.meeting-rooms-container #meetingRoomsList {
   list-style: none;
-  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,10 +8,9 @@
   background-color: #f8f1f1;
   height: calc(100vh - 70px);
   flex-direction: column;
-  width: 100%;
   cursor: pointer;
 }
-.container #meetingRoomsList li {
+.meeting-rooms-container #meetingRoomsList li {
   width: 80%;
   background-color: white;
   border-radius: 5px;
@@ -30,7 +19,7 @@
   text-align: center;
   color: #3f7776;
 }
-.container #meetingRoomsList li a {
+.meeting-rooms-container #meetingRoomsList li a {
   color: #3f7776;
   text-decoration: none;
 }/*# sourceMappingURL=meeting-rooms.css.map */

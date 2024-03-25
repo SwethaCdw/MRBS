@@ -2,33 +2,17 @@
 @import '../../constants/colors/colors.scss';
 @import '../../constants/variables/variables.scss';
 
-.container{
-    @include border-radius;
-    width: 100%;
-    @include center-content;
-    flex-direction: column;
+.meeting-rooms-container{
     #meetingRoomsList {
         list-style: none;
-        padding: 0;
         @include center-content;
         @include border-radius;
         background-color: $background-color;
         height: $header-height;
         flex-direction: column;
-        width: 100%;
         cursor: pointer;
         li{
-            width: 80%;
-            background-color: white;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            padding: 10px;
-            text-align: center;
-            color: $primary-color;
-            a{
-                color: $primary-color;
-                text-decoration: none;
-            }
+           @include meeting-room-card-styles;
         }
     }
 }

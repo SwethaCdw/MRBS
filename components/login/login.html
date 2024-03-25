@@ -8,27 +8,28 @@
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <img id="logo"></img>
-    <div class="container">
-        <form id="loginForm">
-            <div class="form-group">
-                <input placeholder="Enter your email id" type="text" id="username" name="username" required>
-                <p id="emailValidationMessage" class="error"></p>
-
-            </div>
-            <div class="form-group">
-                <input placeholder="Enter your password" type="password" id="password" name="password" required>
-                <p id="passwordValidationMessage" class="error"></p>
-            </div>
-            <div class="submit">
-                <button type="submit">Login</button>
-                <p id="error" class="error"></p>
-            </div>
-        </form>
-    </div>
-    <div>
-        <button id="view-rooms">View Rooms</button>
-    </div>
-    <script type="module" src="login.js"></script>
+    <main>
+        <section class="logo-container">
+            <img id="logo" alt="Logo">
+        </section>
+        <section class="form-container">
+            <form id="loginForm">
+                <div class="form-group">
+                    <input placeholder="Enter your email id" type="email" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <input placeholder="Enter your password" type="password" id="password" name="password" required>
+                </div>
+                <div class="submit">
+                    <p id="error" class="error">Invalid username or password</p>
+                    <button id="submit-form-btn" type="submit" disabled>Login</button>
+                </div>
+            </form>
+        </section>
+        <section class="view-rooms-container">
+            <button id="view-rooms">View Rooms</button>
+        </section>
+    </main>
 </body>
+<script type="module" src="login.js"></script>
 </html>

@@ -1,20 +1,23 @@
 [
     {
         "userId": 1,
-        "username": "Swetha",
-        "password": "123",
+        "username": "swetha.prakashan@cdw.com",
+        "name": "Swetha",
+        "password": "swetha@123",
         "profileImage": "https://github.com/SwethaCdw/image/blob/main/swetha.jpeg?raw=true"
     },
     {
         "userId" : 2,
-        "username": "Veena",
-        "password": "456",
+        "username": "veena.kumaran@cdw.com",
+        "name": "Veena",
+        "password": "veena@123",
         "profileImage": "https://github.com/SwethaCdw/image/blob/main/veena.jpeg?raw=true"
     },
     {
         "userId": 3,
-        "username": "Nijin",
-        "password": "789",
+        "username": "nijin.vinodan@cdw.com",
+        "name": "Nijin",
+        "password": "nijin@123",
         "profileImage": "https://github.com/SwethaCdw/image/blob/main/nijin-profile.jpeg?raw=true"
     }
 ]

@@ -1,45 +1,60 @@
-import { getUserData } from "../../services/user-service.js";
-import { getItemFromLocalStorage, removeItemFromLocalStorage, setItemInLocalStorage } from '../../utils/local-storage-utils.js';
-import { LOCAL_STORAGE_KEYS, LOGO } from '../../constants/common-constants.js';
-import { validateEmail } from '../../utils/validation-utils.js';
-import { initializeUserAuth } from "../../utils/common-utils.js";
+import { setItemInLocalStorage } from '../../utils/local-storage-utils.js';
+import { EVENT_LISTENERS, LOCAL_STORAGE_KEYS, LOGO } from '../../constants/common-constants.js';
+import { isValidUser, validateEmail, validatePassword } from '../../utils/validation-utils.js';
+import { getElementById, initializeUserAuth } from "../../utils/common-utils.js";
+import { ROUTES } from "../../constants/routes-constants.js";
 
-const userData = getUserData();
 
-const form = document.getElementById("loginForm");
-const errorElement = document.getElementById("error");
-
-let logo = document.getElementById('logo');
-logo.src = LOGO;
-
-form.addEventListener("submit", function(event) {
-    let {isLoggedIn, username} = initializeUserAuth();
-    event.preventDefault();
-    username = form.username.value;
-    const password = form.password.value;
-
-    if (isValidUser(username, password)) {
-        isLoggedIn = true;
-        setItemInLocalStorage(LOCAL_STORAGE_KEYS.IS_LOGGED_IN, 'true');
-        setItemInLocalStorage(LOCAL_STORAGE_KEYS.USERNAME, username);
-        window.location.href = "../dashboard/dashboard.html";
-    } else {
-        errorElement.textContent = "Invalid username or password";
-        errorElement.style.display = "block";        
-    }
+const initializeLogin = () => {
+    let { isLoggedIn, username } = initializeUserAuth();  
     
-});
+    //If user is already logged in
+    if (isLoggedIn) {
+        window.location.href = ROUTES.dashboard; 
+    } else {
+        const form = getElementById("loginForm");
+        const errorElement = getElementById("error");
 
+        let logo = getElementById('logo');
+        logo.src = LOGO;
 
-const isValidUser = (username, password) => {
-    const user = userData.find(user => user.username === username && user.password === password);
-    return !!user;
+        //Disable login button when username and password is invalid
+        const toggleLoginButton = () => {
+            const submitFormButton = getElementById("submit-form-btn");
+            const isUsernameValid = validateEmail(form.username.value);
+            const isPasswordValid = validatePassword(form.password.value);
+            submitFormButton.disabled = !(isUsernameValid && isPasswordValid);
+        }
+
+        const passwordInput = getElementById("password");
+        const userName = getElementById("username");
+        userName.addEventListener(EVENT_LISTENERS.INPUT, toggleLoginButton);
+        passwordInput.addEventListener(EVENT_LISTENERS.INPUT, toggleLoginButton);
+
+        //On click on login button
+        form.addEventListener(EVENT_LISTENERS.SUBMIT, function(event) {
+            event.preventDefault();
+            username = form.username.value;
+            const password = form.password.value;
+
+            if (isValidUser(username, password)) {
+                isLoggedIn = true;
+                setItemInLocalStorage(LOCAL_STORAGE_KEYS.IS_LOGGED_IN, 'true');
+                setItemInLocalStorage(LOCAL_STORAGE_KEYS.USERNAME, username);
+                window.location.href = ROUTES.dashboard;
+            } else {
+                errorElement.style.visibility = "visible";        
+            }
+        });
+
+        //When clicked on view rooms
+        const viewRooms = getElementById("view-rooms");
+        viewRooms.addEventListener(EVENT_LISTENERS.CLICK, function() {
+            window.location.href = ROUTES.meetingRooms;
+        });
+
+    }
 };
 
 
-const viewRooms = document.getElementById("view-rooms");
-
-viewRooms.addEventListener("click", function() {
-    window.location.href = '../meeting-room-list/meeting-rooms.html';
-  });
-
+initializeLogin();

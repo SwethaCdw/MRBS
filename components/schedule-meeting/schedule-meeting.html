@@ -20,8 +20,8 @@
         <input type="text" id="meetingName" name="meetingName" placeholder="Enter meeting name" required>
     </div>
     <div class="confidential-meeting">
-        <input type="checkbox" id="confidential" name="confidential">
-        <label for="confidential">Show Meeting Name</label>
+        <input type="checkbox" id="showMeetingName" name="showMeetingName">
+        <label for="showMeetingName">Show Meeting Name</label>
     </div>
     <div>
         <select aria-placeholder="Select an organizer" id="organizerDropdown" required>
@@ -35,6 +35,7 @@
       <input type="time" id="fromTime" name="fromTime" required>
       <input type="time" id="toTime" name="toTime" required>
     </div>
+    <p id="error"></p>
     <button type="submit">Book Now</button>
   </form>
 </div>

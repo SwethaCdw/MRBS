@@ -1,102 +1,74 @@
 @import '../../constants/mixins/mixins.scss';
 @import '../../constants/colors/colors.scss';
 @import '../../constants/variables/variables.scss';
-body{
-    .schedule-meeting-container {
-        height: $header-height;
-        background-color: $background-color;
-        @include border-radius;
-        @include center-content;
-      
-        h2 {
-          text-align: center;
-          margin-bottom: 20px;
-        }
-      
-        form {
-          font-family: sans-serif;
-          font-size: 13px;
-          width: 80%;
-          margin: 0 auto;
-          padding: 20px;
-          background-color: white;
-          border-radius: 5px;
-          box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1); 
-          div {
-            margin-bottom: 15px;
-          }
-    
-          .confidential-meeting{
-            display: flex;
-            align-items: center;
-            flex-direction: row;
-            label{
-                margin: 0;
-                color: #437874;
-            }
-          }
-      
-          input[type="text"],
-          input[type="date"],
-          input[type="time"],
-          select {
-            width: 100%;
-            padding: 8px;
-            border: none;
-            border-bottom: 1px solid #437874;
-            box-sizing: border-box; 
-            color: #437874;
-            
-          }
+.schedule-meeting-container {
+    height: $header-height;
+    background-color: $background-color;
+    @include border-radius;
+    @include center-content;
+  
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    form {
+      font-size: $font-size;
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: $form-background;
+      border-radius: 5px;
+      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1); 
+      div {
+        margin-bottom: 15px;
+      }
 
-        input::placeholder {
-            color: #437874;
-        }
-      
-          input[type="checkbox"] {
-            margin-right: 5px;
-            vertical-align: middle;
-            accent-color: $primary-color;
-          }
-
-          input[type="checkbox"]:checked {
-            background-color: #437874;
-          }
-
-          #fromTime:before {
-            content: 'Start Time';
+      .confidential-meeting{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        label{
+            margin: 0;
             color: $primary-color;
-            position: absolute;
-            background: #fff;
-            height: 18px;
         }
-        #toTime:before {
-          content: 'To Time';
+      }
+  
+      input[type="text"],
+      input[type="date"],
+      input[type="time"],
+      select {
+        width: 100%;
+        @include form-input;
+        color: $primary-color;
+      }
+
+      input::placeholder {
           color: $primary-color;
-          position: absolute;
-          background: #fff;
-          height: 18px;
       }
-      .time-input{
-        margin: 15px auto;
-        width: 40%;
-      }
-        
-          button[type="submit"] {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #437874;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-          }
-      
-          button[type="submit"]:hover {
-            background-color: green;
-          }
+    
+      input[type="checkbox"] {
+        margin-right: 5px;
+        vertical-align: middle;
+        accent-color: $primary-color;
+        &:checked {
+          background-color: $primary-color;
         }
       }
-}
+
+
+    .time-input{
+      margin: 15px auto;
+      width: 40%;
+    }
+    
+      button[type="submit"] {
+        @include button-style;
+      }
+
+      #error {
+        @include error-style;
+      }
+    }
+  }
+

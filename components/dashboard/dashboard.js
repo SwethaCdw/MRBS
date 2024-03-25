@@ -1,53 +1,46 @@
-import { MEETING_INFO_ICON } from "../../constants/common-constants.js";
-import { initializeUserAuth } from "../../utils/common-utils.js";
+import { EVENT_LISTENERS, MEETING_INFO_ICON, NO_UPCOMING_MEETINGS } from "../../constants/common-constants.js";
+import { getElementById, initializeUserAuth, createElement } from "../../utils/common-utils.js";
 import { meetingRooms } from "../../services/meeting-rooms-service.js";
-import { createElement } from "../../utils/common-utils.js";
 import { headerComponent } from "../header/header.js";
-
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM content has been loaded');
-});
-
+import { checkRoomStatus } from "../../utils/meeting-utils.js";
+import { ROUTES } from "../../constants/routes-constants.js";
+import { getItemFromLocalStorage } from "../../utils/local-storage-utils.js";
+import { removeCompletedMeeting } from "../scheduler/scheduler.js";
 
 const initializeDashboard = () => {
-    const meetings = JSON.parse(localStorage.getItem('meetings'));
+    setInterval(removeCompletedMeeting, 10000);
 
-    const {isLoggedIn, username} = initializeUserAuth();
-    if(isLoggedIn){
-        let header = document.getElementById('header');
-        header.appendChild(headerComponent());
-        header.style.padding = '10px';
-    }
-    const filteredMeetings = filterMeetingsByName(meetings, username);
+    const { username } = initializeUserAuth();
+    const meetings = JSON.parse(getItemFromLocalStorage('meetings'));
+
+    //Get header component
+    let header = getElementById('header');
+    header.appendChild(headerComponent());
+    header.style.padding = '10px';
+
+    //Filter meetings based on username
+    const filteredMeetings = filterMeetingsByName(meetings, username)?.filter(meeting => !meeting.isMeetingCompleted);
+
+    //Initialize Upcoming meeting cards
     initializeMeetingCards(filteredMeetings);
-    
 
-}
+    //Initialize Meeting room cards
+    createMeetingRoomContainer();
 
-const createMeetingCard = (meeting) => {
-    const card = document.createElement('card-component');
-    let meetingInfoElement = `<h3>${meeting.name}</h3>`;
-    Object.keys(MEETING_INFO_ICON).forEach(icon => {
-        meetingInfoElement+= icon === 'time' ?  
-            `${createMeetingInfoElement(icon, meeting.from + " - " + meeting.to)}` : 
-            `${createMeetingInfoElement(icon, meeting[icon])}`;
+    //Icon for moving to schedule form
+    const floatingIconElement = getElementById('floating-icon');
+    floatingIconElement.addEventListener(EVENT_LISTENERS.CLICK, function() {
+        window.location.href = ROUTES.scheduleMeeting;
     });
-    card.innerHTML = meetingInfoElement;
-    card.classList.add('meeting-card');
-    return card;
 }
 
-const createMeetingInfoElement = (icon, data) => {
-    const meetingInfoElement = `<p> <i class="fa-solid ${MEETING_INFO_ICON[icon]}"></i> ${data} </p>`;
-    return meetingInfoElement;
-}
+// Initialize meeting cards
+const filterMeetingsByName = (meetings, username) => meetings?.filter(meeting => meeting.organizerId === username);
 
 // Function to initialize meeting cards
 const initializeMeetingCards = (meetings) => {
-    console.log(meetings);
-    let myUpcomingMeetings = document.getElementById('my-meetings');
-    if(meetings && meetings?.length != 0){
-        console.log(meetings);
+    const myUpcomingMeetings = getElementById('my-meetings');
+    if(meetings && meetings?.length){
         const fragment = document.createDocumentFragment();
         meetings?.forEach(meeting => {
             const card = createMeetingCard(meeting);
@@ -56,33 +49,28 @@ const initializeMeetingCards = (meetings) => {
         myUpcomingMeetings.appendChild(fragment);
     } else {
         let noMeetings = createElement('p');
-        noMeetings.textContent = 'No upcoming meetings.'
+        noMeetings.textContent = NO_UPCOMING_MEETINGS;
         myUpcomingMeetings.appendChild(noMeetings);
     }
     
 }
 
-// Initialize meeting cards
-const filterMeetingsByName = (meetings, name) => meetings?.filter(meeting => meeting.organizer === name);
-
-initializeDashboard();
-
-
-const createMeetingRoomCard = (room) => {
-    let meetingRoomCard = createElement('div', 'meeting-room-card');
-    let cardImage = createElement('img', 'card-image');
-    cardImage.src = room.image;
-    let cardDetailElement = createElement('div', null, 'meeting-rooms-detail');
-    let meetingRoomName = createElement('p', 'room-name');
-    meetingRoomName.innerText = room.name;
-    cardDetailElement.appendChild(meetingRoomName);
-    meetingRoomCard.appendChild(cardImage);
-    meetingRoomCard.appendChild(cardDetailElement);
-    return meetingRoomCard;
+const createMeetingCard = (meeting) => {
+    const card = createElement('card-component');
+    let meetingInfoElement = `<h3>${meeting.name}</h3>`;
+    Object.keys(MEETING_INFO_ICON).forEach(icon => {
+        const meetingDetail = icon === 'TIME' ? `${meeting.from} - ${meeting.to}` : meeting[icon.toLowerCase()];
+        meetingInfoElement += `${createMeetingInfoElement(icon, meetingDetail)}`;
+    });
+    card.innerHTML = meetingInfoElement;
+    card.classList.add('meeting-card');
+    return card;
 }
 
+const createMeetingInfoElement = (icon, meetingDetail) => `<p> <i class="fa-solid ${MEETING_INFO_ICON[icon]}"></i> ${meetingDetail} </p>`;
 
 
+//Meeting Rooms
 const createMeetingRoomContainer = () => {
     let meetingRoomDF = document.createDocumentFragment();
     meetingRooms.forEach(room => {
@@ -90,13 +78,39 @@ const createMeetingRoomContainer = () => {
         meetingRoomDF.appendChild(roomCard);
     });
 
-    let meetingRoomContainer = document.getElementById('meeting-rooms');
+    let meetingRoomContainer = getElementById('meeting-rooms');
     meetingRoomContainer.appendChild(meetingRoomDF);
 }
 
-createMeetingRoomContainer();
 
-const floatingIconElement = document.getElementById('floating-icon');
-floatingIconElement.addEventListener('click', function() {
-    window.location.href = '../schedule-meeting/schedule-meeting.html';
-  });
+const createMeetingRoomCard = (room) => {
+    let meetingRoomCard = createElement('div', 'meeting-room-card');
+
+    meetingRoomCard.addEventListener(EVENT_LISTENERS.CLICK, function(){
+        window.location.href = `${ROUTES.meetingStatus}?param=${room.name}`;
+    })
+    let roomStatus = checkRoomStatus(room.name, new Date());
+    const statusColor = roomStatus === 'Available' ? '#008f22' : '#8f0000';
+    const imageContainer = createElement('div', 'image-container');
+    const cardImage = createElement('img', 'card-image');
+    cardImage.src = room.image;
+    const roomStatusElement = createElement('div', 'room-status-container');
+    const textOverlay = createElement('div', 'text-overlay');
+    textOverlay.textContent = roomStatus;
+    const circle = createElement('div', 'circle');
+    circle.style.backgroundColor = statusColor;
+    textOverlay.style.color = statusColor;
+    roomStatusElement.appendChild(circle);
+    roomStatusElement.appendChild(textOverlay);
+    imageContainer.appendChild(cardImage);
+    imageContainer.appendChild(roomStatusElement);
+    const cardDetailElement = createElement('div', null, 'meeting-rooms-detail');
+    const meetingRoomName = createElement('p', 'room-name');
+    meetingRoomName.innerText = room.name;
+    cardDetailElement.appendChild(meetingRoomName);
+    meetingRoomCard.appendChild(imageContainer);
+    meetingRoomCard.appendChild(cardDetailElement);
+    return meetingRoomCard;
+}
+
+initializeDashboard();

@@ -1,25 +1,21 @@
+import { ROUTES } from '../../constants/routes-constants.js';
 import { meetingRooms } from '../../services/meeting-rooms-service.js';
-import { initializeUserAuth } from '../../utils/common-utils.js';
-import { headerComponent } from '../header/header.js';
+import { createElement, getElementById, setHeaderSection } from '../../utils/common-utils.js';
 
 const initializeMeetingRoomsList = () => {
-    console.log('initializemeeting');
-    const {isLoggedIn} = initializeUserAuth();
-    if(isLoggedIn){
-        let header = document.getElementById('header');
-        header.appendChild(headerComponent());
-        header.style.padding = '10px';
-    }
-    const meetingList = document.getElementById('meetingRoomsList');
+    let header = getElementById('header');
+    header = setHeaderSection(header);
 
-    meetingRooms.forEach(function(room) {
-        const li = document.createElement("li");
-        const anchorTag = document.createElement("a");
-        anchorTag.textContent = room.name;
-        anchorTag.href = "../meeting-status/meeting-status" + ".html?param=" + room.name;
+    const meetingList = getElementById('meetingRoomsList');
 
-        li.appendChild(anchorTag);
-        meetingList.appendChild(li);
+    meetingRooms.forEach(room => {
+        const meetingListItem = createElement("li");
+        const meetingRoomLink = createElement("a");
+        meetingRoomLink.textContent = room.name;
+        meetingRoomLink.href = `${ROUTES.meetingStatus}?param=${room.name}`;
+
+        meetingListItem.appendChild(meetingRoomLink);
+        meetingList.appendChild(meetingListItem);
     });
 }
 initializeMeetingRoomsList();

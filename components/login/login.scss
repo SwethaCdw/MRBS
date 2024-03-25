@@ -1,68 +1,60 @@
 @import '../../constants/mixins/mixins.scss';
 @import '../../constants/colors/colors.scss';
+@import '../../constants/variables/variables.scss';
+
 body {
-    margin: 0;
-    padding: 0;
-    @include center-content;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: $background-color;
-    #logo{
-        width: 150px;
-        padding-bottom: 20px;
-    }
-    button {
-        @include button-style;
-    }
-    #view-rooms {
-        margin-top: 20px;
-    }
-
-
-    .container {
-        width: 50%;
-        height: 250px;
-        background-color: #fdfeff;
+    main{
         @include center-content;
         flex-direction: column;
-        
-        
-
-        .form-group{
-            padding: 10px 0;
-
-            input {
-                width: 40vw;
-                padding: 10px;
-                border: none;
-                background-color: transparent;
-                border-bottom: 1px solid $primary-color;
-                transition: box-shadow 0.3s;
+        background-color: $background-color;
+        min-height: $max-viewport-height;
+        .logo-container{
+            #logo{
+                width: 150px;
+                padding-bottom: 20px;
             }
-    
-            input:focus {
-                box-shadow: 0 0 10px #19d4ca;
-            }
-            
-            input::placeholder{
-                color: $primary-color;
-            }
-        }
-        button[type="submit"] {
+        } 
+        #view-rooms {
             margin-top: 20px;
-            width: 100%;
         }
+
+        .form-container {
+            @include center-content;
+            flex-direction: column;
+            width: 50%;
+            height: 100%;
+            padding: 30px;
+            background-color: $form-background;
+            box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1); 
     
-        button[type="submit"]:hover {
-            background-color: #45a049;
+            .form-group{
+                padding: 10px 0;
+    
+                input {
+                    @include form-input;
+                  }
+               
+            }
+            .error {
+                @include error-style;
+            }
         }
-       
+        button {
+            @include button-style;
         
-        .error{
-            color: red;
+            &[type="submit"] {
+                margin-top: 20px;
+                width: 100%;
+            
+                &:hover {
+                 background-color: $primary-button-hover-color;
+                }
+            
+                &:disabled {
+                 @include disabled-button;
+                }
+            }
         }
     }
-    
 }
 
-  

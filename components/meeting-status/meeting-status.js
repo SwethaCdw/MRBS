@@ -1,64 +1,98 @@
 import { meetingRooms } from '../../services/meeting-rooms-service.js';
-import {getParameterByName, initializeUserAuth} from '../../utils/common-utils.js';
-import { ICON_MAP } from '../../constants/common-constants.js';
-import { headerComponent } from '../header/header.js';
+import { createElement, getElementById, getParameterByName, initializeUserAuth, setHeaderSection } from '../../utils/common-utils.js';
+import { EVENT_LISTENERS, MEETING_STATUS, MEETING_UTILITIES, MESSAGES} from '../../constants/common-constants.js';
+import { getMeetingDetails } from '../../utils/meeting-utils.js';
+import { removeCompletedMeeting } from '../scheduler/scheduler.js';
+import { ROUTES } from '../../constants/routes-constants.js';
+import { getCurrentDateAndTime, splitTimeConversion } from '../../utils/time-utils.js';
 
 const getRoomAmenities = (meetingRooms, roomName) => meetingRooms.find(room => room.name === roomName);
 
 const initializeMeetingStatus = () => {
-    const {isLoggedIn} = initializeUserAuth();
-    if(isLoggedIn){
-        let header = document.getElementById('header');
-        header.appendChild(headerComponent());
-        header.style.padding = '10px';
-    }
+    setInterval(removeCompletedMeeting, 10000);
 
-    const meetings = JSON.parse(localStorage.getItem('meetings'));
+    const { isLoggedIn } = initializeUserAuth();
+    let header = getElementById('header');
+    setHeaderSection(header);
 
     //Room name
     var roomName = getParameterByName('param');
-    const meetingRoomName = document.getElementById('room-name');
+    const meetingRoomName = getElementById('room-name');
     meetingRoomName.textContent = roomName;
 
     //Filter meetings based on room name
-    const filteredMeetings = meetings.filter(meeting => meeting.room === roomName);
+    let meetingsDetails = getMeetingDetails(roomName);
+    meetingsDetails = meetingsDetails ? meetingsDetails.filter(meeting => !meeting.isMeetingCompleted) : meetingsDetails;
 
-    const upcomingMeetingsList = document.getElementById('upcoming-meetings');
-    const currentMeeting = document.getElementById('current-meeting');
+    const upcomingMeetingsSection = getElementById('upcoming-meetings');
+    const currentMeetingSection = getElementById('current-meeting');
 
-    //
-    const currentDate = new Date();
-    const currentTime = currentDate.getHours() * 100 + currentDate.getMinutes(); 
+    const currentDateObject = getCurrentDateAndTime();
 
-    if(filteredMeetings.length != 0){
-        filteredMeetings.forEach(function(meeting) {
-            const meetingDate = new Date(meeting.date);
-            const meetingFrom = parseInt(meeting.from.replace(":", ""), 10); 
-            const meetingTo = parseInt(meeting.to.replace(":", ""), 10); 
+    console.log('Hello');
+
+        console.log(meetingsDetails);
+    if(meetingsDetails && meetingsDetails?.length != 0){
+        console.log('Hi');
+        meetingsDetails?.forEach(function(meeting) {
+            const meetingDateObject = getCurrentDateAndTime(meeting.date);
+
+            const meetingFrom = splitTimeConversion(meeting.from);
+            const meetingTo = splitTimeConversion(meeting.to);
+            console.log('Swe');
+            if (currentDateObject.date.toDateString() === meetingDateObject.date.toDateString() && currentDateObject.time >= meetingFrom && currentDateObject.time <= meetingTo) {
+
+                console.log('IN if');
+                // Current meeting is ongoing
+                currentMeetingSection.style.backgroundColor = MEETING_STATUS.BUSY.COLOR;
             
-            if (currentDate.toDateString() === meetingDate.toDateString() && currentTime >= meetingFrom && currentTime <= meetingTo) {
-            currentMeeting.style.backgroundColor = "#8d0000";
-            console.log(`Meeting "${meeting.name}" in ${meeting.room} is currently in progress.`, currentMeeting);
-            let currentMeetingName = document.createElement('p');
-            currentMeetingName.textContent = meeting.name;
-            currentMeeting.appendChild(currentMeetingName);
+                const currentMeetingName = createElement('h3');
+                currentMeetingName.textContent = meeting.isMeetingNameVisible ? meeting.name : MEETING_STATUS.BUSY.MESSAGE;
+            
+                const organizedByText = createElement('p');
+                organizedByText.textContent = `${MESSAGES.MEETING_ORGANIZED_BY} ${meeting.organizer}`;
+            
+                currentMeetingSection.appendChild(currentMeetingName);
+                currentMeetingSection.appendChild(organizedByText);
             } else {
-            currentMeeting.style.backgroundColor = "#008d00";
-            currentMeeting.textContent = 'Room is Available';
-            const div = document.createElement("div");
-            const ul = document.createElement('ul');
-            const li = document.createElement('li');
-            li.textContent = meeting.name;
-            ul.appendChild(li);
-            div.appendChild(ul);
-            upcomingMeetingsList.appendChild(div);
+                console.log("In else");
+                // Room is available or there are upcoming meetings
+                currentMeetingSection.style.backgroundColor = MEETING_STATUS.AVAILABLE.COLOR;
+                currentMeetingSection.textContent = MEETING_STATUS.AVAILABLE.MESSAGE;
+            
+                const upcomingMeetingsContainer = createElement("div");
+                const upcomingMeetingDetailsList = createElement('ul');
+            
+                const upcomingMeetingItems = [
+                    { title: meeting.isMeetingNameVisible ? meeting.name :  MEETING_STATUS.BUSY.MESSAGE },
+                    { details: meeting.organizer },
+                    { details: `${meeting.from}-${meeting.to}` }
+                ];
+                upcomingMeetingItems.forEach(item => {
+                    const title = createElement('h4');
+                    title.textContent = item.title;
+            
+                    const listItem = createElement('li');
+                    listItem.textContent = item.details;
+            
+                    upcomingMeetingDetailsList.appendChild(title);
+                    upcomingMeetingDetailsList.appendChild(listItem);
+                });
+            
+                upcomingMeetingsContainer.appendChild(upcomingMeetingDetailsList);
+                upcomingMeetingsSection.appendChild(upcomingMeetingsContainer);
             }
         });
     } else {
-            currentMeeting.style.backgroundColor = "#008d00";
-            let currentMeetingName = document.createElement('p');
-            currentMeetingName.textContent = 'Room is Available';
-            currentMeeting.appendChild(currentMeetingName);
+            console.log("ELse");
+            currentMeetingSection.style.backgroundColor = MEETING_STATUS.AVAILABLE.COLOR;
+            let currentMeetingName = createElement('p');
+            currentMeetingName.textContent = MEETING_STATUS.AVAILABLE.MESSAGE;
+            currentMeetingSection.appendChild(currentMeetingName);
+
+            let upcomingMeetingContainer = createElement('p','no-upcoming-meetings');
+            upcomingMeetingContainer.textContent = MESSAGES.NO_UPCOMING_MEETINGS;
+            upcomingMeetingsSection.appendChild(upcomingMeetingContainer);
     }
 
 
@@ -67,32 +101,29 @@ const initializeMeetingStatus = () => {
     createAmenities(roomAmenities);
 
     //Book a room button
-    let bookingRoomButton = document.createElement('button');
-    bookingRoomButton.textContent = 'Book a Room';
+    let bookingRoomButton = createElement('button');
+    bookingRoomButton.textContent = MESSAGES.BOOK_A_ROOM;
     bookingRoomButton.id = 'book-button';
-    upcomingMeetingsList.appendChild(bookingRoomButton);
+    upcomingMeetingsSection.appendChild(bookingRoomButton);
 
-    bookingRoomButton.addEventListener('click', function() {
-        window.location.href = '../schedule-meeting/schedule-meeting.html';
+    bookingRoomButton.addEventListener(EVENT_LISTENERS.CLICK, function() {
+        if(!isLoggedIn){
+            alert('You have to login to continue booking');
+        }
+        window.location.href = isLoggedIn ?  ROUTES.scheduleMeeting : ROUTES.login;
     });
 
 }
 
 const createAmenities = (amenities) => {
-    const roomAmenities = document.getElementById('room-amenities');
-    console.log(roomAmenities, amenities);
-    roomAmenities.innerHTML = '';
-
-
-    const div = document.createElement('div');
+    const roomAmenities = getElementById('room-amenities');
     roomAmenities.innerHTML = `
-        <div>
+        <div class='occupancy'>
             <i class="fa-solid fa-chair"></i>
             <p>${amenities.occupancy || ''}</p>
         </div>
-        ${amenities.utilities.map(utility => `<div><i class="fa-solid ${ICON_MAP[utility]}"></i></div>`).join('')}
-    `;
-    // roomAmenities.appendChild(div);
+        ${amenities.utilities.map(utility => 
+            `<div><i class="fa-solid ${MEETING_UTILITIES[utility.toUpperCase()].icon}"></i> <p>${MEETING_UTILITIES[utility.toUpperCase()].utility} </p></div>`).join('')}`;
 
 }
 

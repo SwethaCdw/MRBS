@@ -1,4 +1,4 @@
-body .schedule-meeting-container {
+.schedule-meeting-container {
   height: calc(100vh - 70px);
   background-color: #f8f1f1;
   border-top-left-radius: 50px;
@@ -7,11 +7,11 @@ body .schedule-meeting-container {
   justify-content: center;
   align-items: center;
 }
-body .schedule-meeting-container h2 {
+.schedule-meeting-container h2 {
   text-align: center;
   margin-bottom: 20px;
 }
-body .schedule-meeting-container form {
+.schedule-meeting-container form {
   font-family: sans-serif;
   font-size: 13px;
   width: 80%;
@@ -21,22 +21,22 @@ body .schedule-meeting-container form {
   border-radius: 5px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
 }
-body .schedule-meeting-container form div {
+.schedule-meeting-container form div {
   margin-bottom: 15px;
 }
-body .schedule-meeting-container form .confidential-meeting {
+.schedule-meeting-container form .confidential-meeting {
   display: flex;
   align-items: center;
   flex-direction: row;
 }
-body .schedule-meeting-container form .confidential-meeting label {
+.schedule-meeting-container form .confidential-meeting label {
   margin: 0;
   color: #437874;
 }
-body .schedule-meeting-container form input[type=text],
-body .schedule-meeting-container form input[type=date],
-body .schedule-meeting-container form input[type=time],
-body .schedule-meeting-container form select {
+.schedule-meeting-container form input[type=text],
+.schedule-meeting-container form input[type=date],
+.schedule-meeting-container form input[type=time],
+.schedule-meeting-container form select {
   width: 100%;
   padding: 8px;
   border: none;
@@ -44,39 +44,25 @@ body .schedule-meeting-container form select {
   box-sizing: border-box;
   color: #437874;
 }
-body .schedule-meeting-container form input::-moz-placeholder {
+.schedule-meeting-container form input::-moz-placeholder {
   color: #437874;
 }
-body .schedule-meeting-container form input::placeholder {
+.schedule-meeting-container form input::placeholder {
   color: #437874;
 }
-body .schedule-meeting-container form input[type=checkbox] {
+.schedule-meeting-container form input[type=checkbox] {
   margin-right: 5px;
   vertical-align: middle;
   accent-color: #3f7776;
 }
-body .schedule-meeting-container form input[type=checkbox]:checked {
+.schedule-meeting-container form input[type=checkbox]:checked {
   background-color: #437874;
 }
-body .schedule-meeting-container form #fromTime:before {
-  content: "Start Time";
-  color: #3f7776;
-  position: absolute;
-  background: #fff;
-  height: 18px;
-}
-body .schedule-meeting-container form #toTime:before {
-  content: "To Time";
-  color: #3f7776;
-  position: absolute;
-  background: #fff;
-  height: 18px;
-}
-body .schedule-meeting-container form .time-input {
+.schedule-meeting-container form .time-input {
   margin: 15px auto;
   width: 40%;
 }
-body .schedule-meeting-container form button[type=submit] {
+.schedule-meeting-container form button[type=submit] {
   display: block;
   width: 100%;
   padding: 10px;
@@ -87,6 +73,11 @@ body .schedule-meeting-container form button[type=submit] {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-body .schedule-meeting-container form button[type=submit]:hover {
+.schedule-meeting-container form button[type=submit]:hover {
   background-color: green;
+}
+.schedule-meeting-container form #error {
+  visibility: hidden;
+  color: #ff0000;
+  padding: 10px;
 }/*# sourceMappingURL=schedule-meeting.css.map */

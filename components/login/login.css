@@ -1,18 +1,53 @@
-body {
-  margin: 0;
-  padding: 0;
+body main {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: 100vh;
   background-color: #f8f1f1;
+  min-height: 100vh;
 }
-body #logo {
+body main .logo-container #logo {
   width: 150px;
   padding-bottom: 20px;
 }
-body button {
+body main #view-rooms {
+  margin-top: 20px;
+}
+body main .form-container {
+  width: 50%;
+  height: 100%;
+  padding: 30px;
+  background-color: #fdfeff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+body main .form-container .form-group {
+  padding: 10px 0;
+}
+body main .form-container .form-group input {
+  width: 40vw;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #3f7776;
+  transition: box-shadow 0.3s;
+}
+body main .form-container .form-group input:focus {
+  box-shadow: 0 0 10px #19d4ca;
+}
+body main .form-container .form-group input::-moz-placeholder {
+  color: #3f7776;
+}
+body main .form-container .form-group input::placeholder {
+  color: #3f7776;
+}
+body main .form-container .error {
+  visibility: hidden;
+  color: red;
+}
+body main button {
   border: none;
   border-radius: 4px;
   padding: 10px 20px;
@@ -21,45 +56,17 @@ body button {
   color: #ffffff;
   box-shadow: 0 2px 4px #3f7776;
 }
-body #view-rooms {
-  margin-top: 20px;
-}
-body .container {
-  width: 50%;
-  height: 250px;
-  background-color: #fdfeff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-body .container .form-group {
-  padding: 10px 0;
-}
-body .container .form-group input {
-  width: 40vw;
-  padding: 10px;
-  border: none;
-  background-color: transparent;
-  border-bottom: 1px solid #3f7776;
-  transition: box-shadow 0.3s;
-}
-body .container .form-group input:focus {
-  box-shadow: 0 0 10px #19d4ca;
-}
-body .container .form-group input::-moz-placeholder {
-  color: #3f7776;
-}
-body .container .form-group input::placeholder {
-  color: #3f7776;
-}
-body .container button[type=submit] {
+body main button[type=submit] {
   margin-top: 20px;
   width: 100%;
 }
-body .container button[type=submit]:hover {
+body main button[type=submit]:hover {
   background-color: #45a049;
 }
-body .container .error {
-  color: red;
+body main button[type=submit]:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
 }/*# sourceMappingURL=login.css.map */
