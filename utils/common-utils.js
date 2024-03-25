@@ -33,3 +33,7 @@ export const setHeaderSection = (header) => {
     header.style.padding = '10px';
     return header;
 }
+
+export const routeTo = (location) => {
+    window.location.href = location;
+}

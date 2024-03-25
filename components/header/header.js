@@ -1,7 +1,8 @@
-import { createElement, initializeUserAuth } from '../../utils/common-utils.js';
+import { createElement, initializeUserAuth, routeTo } from '../../utils/common-utils.js';
 import { getUserData } from '../../services/user-service.js';
 import { EVENT_LISTENERS, LOGO } from '../../constants/common-constants.js';
 import { logout } from '../logout/logout.js';
+import { ROUTES } from '../../constants/routes-constants.js';
 
 export const headerComponent = () => {
     const { isLoggedIn, username } = initializeUserAuth();
@@ -12,7 +13,8 @@ export const headerComponent = () => {
     const logo = createElement('img', null, 'logo');
     const profileIcon = createElement('img', null, 'profile-icon');
     const dropdownContent = createElement('div', null, 'dropdown-content');
-    const logoutLink = createElement('a');
+    const logoutLink = createElement('a', 'routeLink');
+    const dashboardLink = createElement('a', 'routeLink');
 
     // Set logo source
     logo.src = LOGO;
@@ -30,12 +32,28 @@ export const headerComponent = () => {
         logoutLink.href = '#';
         logoutLink.textContent = 'Logout';
         logoutLink.addEventListener(EVENT_LISTENERS.CLICK, logout);
+
+        dashboardLink.href = '#';
+        dashboardLink.textContent = 'Dashboard';
+        dashboardLink.addEventListener(EVENT_LISTENERS.CLICK, () => {
+            routeTo(ROUTES.dashboard);
+        });
+
         logoutLink.style.textDecoration = 'none';
         logoutLink.style.color = '#000';
         logoutLink.style.display = 'flex';
         logoutLink.style.alignItems = 'center';
 
+        dashboardLink.style.textDecoration = 'none';
+        dashboardLink.style.color = '#000';
+        dashboardLink.style.display = 'flex';
+        dashboardLink.style.alignItems = 'center';
+        dashboardLink.style.paddingBottom = '10px';
+
+        
+
         // Append logout link to dropdown content
+        dropdownContent.appendChild(dashboardLink);
         dropdownContent.appendChild(logoutLink);
         dropdownContent.style.display = 'none'; // Initially hidden
         dropdownContent.classList.add('dropdown-content');
@@ -46,6 +64,7 @@ export const headerComponent = () => {
         dropdownContent.style.border = '1px solid #ccc';
         dropdownContent.style.padding = '10px';
         dropdownContent.style.display = 'none'; // Initially hidden
+        dropdownContent.style.zIndex = '1';
 
         // Append dropdown content to nav
         nav.appendChild(dropdownContent);

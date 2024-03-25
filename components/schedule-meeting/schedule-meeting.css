@@ -12,12 +12,11 @@
   margin-bottom: 20px;
 }
 .schedule-meeting-container form {
-  font-family: sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   width: 80%;
   margin: 0 auto;
   padding: 20px;
-  background-color: white;
+  background-color: #fdfeff;
   border-radius: 5px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
 }
@@ -25,30 +24,48 @@
   margin-bottom: 15px;
 }
 .schedule-meeting-container form .confidential-meeting {
+  font-family: sans-serif;
+  font-size: 13px;
   display: flex;
   align-items: center;
   flex-direction: row;
 }
 .schedule-meeting-container form .confidential-meeting label {
   margin: 0;
-  color: #437874;
+  color: #3f7776;
 }
 .schedule-meeting-container form input[type=text],
 .schedule-meeting-container form input[type=date],
 .schedule-meeting-container form input[type=time],
 .schedule-meeting-container form select {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   border: none;
-  border-bottom: 1px solid #437874;
-  box-sizing: border-box;
-  color: #437874;
+  background-color: transparent;
+  border-bottom: 1px solid #3f7776;
+  transition: box-shadow 0.3s;
+  color: #3f7776;
+}
+.schedule-meeting-container form input[type=text]:focus,
+.schedule-meeting-container form input[type=date]:focus,
+.schedule-meeting-container form input[type=time]:focus,
+.schedule-meeting-container form select:focus {
+  box-shadow: 0 0 10px #19d4ca;
+}
+.schedule-meeting-container form input[type=text]::-moz-placeholder, .schedule-meeting-container form input[type=date]::-moz-placeholder, .schedule-meeting-container form input[type=time]::-moz-placeholder, .schedule-meeting-container form select::-moz-placeholder {
+  color: #3f7776;
+}
+.schedule-meeting-container form input[type=text]::placeholder,
+.schedule-meeting-container form input[type=date]::placeholder,
+.schedule-meeting-container form input[type=time]::placeholder,
+.schedule-meeting-container form select::placeholder {
+  color: #3f7776;
 }
 .schedule-meeting-container form input::-moz-placeholder {
-  color: #437874;
+  color: #3f7776;
 }
 .schedule-meeting-container form input::placeholder {
-  color: #437874;
+  color: #3f7776;
 }
 .schedule-meeting-container form input[type=checkbox] {
   margin-right: 5px;
@@ -56,25 +73,26 @@
   accent-color: #3f7776;
 }
 .schedule-meeting-container form input[type=checkbox]:checked {
-  background-color: #437874;
+  background-color: #3f7776;
 }
 .schedule-meeting-container form .time-input {
   margin: 15px auto;
   width: 40%;
 }
 .schedule-meeting-container form button[type=submit] {
-  display: block;
   width: 100%;
-  padding: 10px;
-  background-color: #437874;
-  color: #fff;
+  display: block;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
+  padding: 10px 20px;
   cursor: pointer;
+  background-color: #3f7776;
+  color: #ffffff;
+  box-shadow: 0 2px 4px #3f7776;
   transition: background-color 0.3s ease;
 }
-.schedule-meeting-container form button[type=submit]:hover {
-  background-color: green;
+.schedule-meeting-container form button[type=submit] :hover {
+  background-color: #45a049;
 }
 .schedule-meeting-container form #error {
   visibility: hidden;

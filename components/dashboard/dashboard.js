@@ -1,5 +1,5 @@
 import { EVENT_LISTENERS, MEETING_INFO_ICON, NO_UPCOMING_MEETINGS } from "../../constants/common-constants.js";
-import { getElementById, initializeUserAuth, createElement } from "../../utils/common-utils.js";
+import { getElementById, initializeUserAuth, createElement, routeTo } from "../../utils/common-utils.js";
 import { meetingRooms } from "../../services/meeting-rooms-service.js";
 import { headerComponent } from "../header/header.js";
 import { checkRoomStatus } from "../../utils/meeting-utils.js";
@@ -20,6 +20,7 @@ const initializeDashboard = () => {
 
     //Filter meetings based on username
     const filteredMeetings = filterMeetingsByName(meetings, username)?.filter(meeting => !meeting.isMeetingCompleted);
+    console.log(filteredMeetings);
 
     //Initialize Upcoming meeting cards
     initializeMeetingCards(filteredMeetings);
@@ -30,7 +31,7 @@ const initializeDashboard = () => {
     //Icon for moving to schedule form
     const floatingIconElement = getElementById('floating-icon');
     floatingIconElement.addEventListener(EVENT_LISTENERS.CLICK, function() {
-        window.location.href = ROUTES.scheduleMeeting;
+        routeTo(ROUTES.scheduleMeeting);
     });
 }
 
@@ -87,7 +88,7 @@ const createMeetingRoomCard = (room) => {
     let meetingRoomCard = createElement('div', 'meeting-room-card');
 
     meetingRoomCard.addEventListener(EVENT_LISTENERS.CLICK, function(){
-        window.location.href = `${ROUTES.meetingStatus}?param=${room.name}`;
+        routeTo(`${ROUTES.meetingStatus}?param=${room.name}`)
     })
     let roomStatus = checkRoomStatus(room.name, new Date());
     const statusColor = roomStatus === 'Available' ? '#008f22' : '#8f0000';
@@ -95,19 +96,25 @@ const createMeetingRoomCard = (room) => {
     const cardImage = createElement('img', 'card-image');
     cardImage.src = room.image;
     const roomStatusElement = createElement('div', 'room-status-container');
+
     const textOverlay = createElement('div', 'text-overlay');
     textOverlay.textContent = roomStatus;
+    textOverlay.style.color = statusColor;
+
     const circle = createElement('div', 'circle');
     circle.style.backgroundColor = statusColor;
-    textOverlay.style.color = statusColor;
+
     roomStatusElement.appendChild(circle);
     roomStatusElement.appendChild(textOverlay);
+
     imageContainer.appendChild(cardImage);
     imageContainer.appendChild(roomStatusElement);
+
     const cardDetailElement = createElement('div', null, 'meeting-rooms-detail');
     const meetingRoomName = createElement('p', 'room-name');
     meetingRoomName.innerText = room.name;
     cardDetailElement.appendChild(meetingRoomName);
+
     meetingRoomCard.appendChild(imageContainer);
     meetingRoomCard.appendChild(cardDetailElement);
     return meetingRoomCard;

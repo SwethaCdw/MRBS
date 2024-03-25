@@ -1,7 +1,7 @@
 
 import { meetingRooms } from "../../services/meeting-rooms-service.js";
 import { getUserData } from "../../services/user-service.js";
-import { createElement, getElementById, initializeUserAuth, setHeaderSection } from "../../utils/common-utils.js";
+import { createElement, getElementById, getParameterByName, initializeUserAuth, routeTo, setHeaderSection } from "../../utils/common-utils.js";
 import { checkAvailabilityOfRoom } from "../../utils/meeting-utils.js";
 import { isFromTimeLessThanToTime } from "../../utils/time-utils.js";
 import { ROUTES } from "../../constants/routes-constants.js";
@@ -9,6 +9,10 @@ import { EVENT_LISTENERS, MESSAGES } from "../../constants/common-constants.js";
 import { getItemFromLocalStorage, setItemInLocalStorage } from "../../utils/local-storage-utils.js";
 
 const initializeMeetingForm = () => {
+
+  var roomName = getParameterByName('param');
+  console.log(roomName);
+
   //Set header section 
   const {isLoggedIn} = initializeUserAuth();
   if(isLoggedIn){
@@ -17,7 +21,7 @@ const initializeMeetingForm = () => {
   }
 
   // Initialize meeting rooms dropdown
-  initializeDropdownOptions("meetingRoomsDropdown", meetingRooms, "name");
+  initializeDropdownOptions("meetingRoomsDropdown", meetingRooms, "name", roomName);
 
   // Initialize organizer dropdown
   const userData = getUserData();
@@ -29,12 +33,15 @@ const initializeMeetingForm = () => {
 
 };
 
-const initializeDropdownOptions = (dropdownId, data, propertyName) => {
+const initializeDropdownOptions = (dropdownId, data, propertyName, initialValue) => {
   const dropdown = getElementById(dropdownId);
   data.forEach(item => {
     const option = createElement("option");
     option.value = item[propertyName];
     option.textContent = item[propertyName];
+    if (item[propertyName] === initialValue) {
+      option.selected = true;
+    }
     dropdown.appendChild(option);
   });
 };
@@ -48,11 +55,12 @@ const handleFormSubmission = (event) => {
   if (meetingData) {
     storeMeetingData(meetingData);
     form.reset();
-    window.location.href = ROUTES.meetingRooms;
+    routeTo(ROUTES.meetingRooms);
   }
 };
 
 const extractMeetingFormData = (form) => {
+  const userData = getUserData();
   // Extract form data
   const meetingName = form.elements.meetingName.value;
   const meetingDate = form.elements.meetingDate.value;
@@ -61,7 +69,8 @@ const extractMeetingFormData = (form) => {
   const meetingRoom = form.elements.meetingRoomsDropdown.value;
   const isMeetingNameVisible = form.elements.showMeetingName.checked;
   const meetingOrganizer = form.elements.organizerDropdown.value;
-  const { username } = initializeUserAuth();
+
+  console.log(userData,userData.find(user => user.name === meetingOrganizer),  userData.find(user => user.name === meetingOrganizer).username);
 
   const meetingData = {
     name: meetingName,
@@ -70,7 +79,7 @@ const extractMeetingFormData = (form) => {
     to: endTime,
     room: meetingRoom,
     organizer: meetingOrganizer,
-    organizerId: username,
+    organizerId: userData.find(user => user.name === meetingOrganizer).username,
     isMeetingNameVisible: isMeetingNameVisible,
     isMeetingCompleted: false
   };

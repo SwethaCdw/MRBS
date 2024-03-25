@@ -1,5 +1,5 @@
 import { meetingRooms } from '../../services/meeting-rooms-service.js';
-import { createElement, getElementById, getParameterByName, initializeUserAuth, setHeaderSection } from '../../utils/common-utils.js';
+import { createElement, getElementById, getParameterByName, initializeUserAuth, routeTo, setHeaderSection } from '../../utils/common-utils.js';
 import { EVENT_LISTENERS, MEETING_STATUS, MEETING_UTILITIES, MESSAGES} from '../../constants/common-constants.js';
 import { getMeetingDetails } from '../../utils/meeting-utils.js';
 import { removeCompletedMeeting } from '../scheduler/scheduler.js';
@@ -33,33 +33,46 @@ const initializeMeetingStatus = () => {
 
         console.log(meetingsDetails);
     if(meetingsDetails && meetingsDetails?.length != 0){
+        let valueSet;
         console.log('Hi');
-        meetingsDetails?.forEach(function(meeting) {
-            const meetingDateObject = getCurrentDateAndTime(meeting.date);
+        meetingsDetails?.forEach( meeting => {
+            if(!valueSet) {
+                const meetingDateObject = getCurrentDateAndTime(meeting.date);
 
-            const meetingFrom = splitTimeConversion(meeting.from);
-            const meetingTo = splitTimeConversion(meeting.to);
-            console.log('Swe');
-            if (currentDateObject.date.toDateString() === meetingDateObject.date.toDateString() && currentDateObject.time >= meetingFrom && currentDateObject.time <= meetingTo) {
+                const meetingFrom = splitTimeConversion(meeting.from);
+                const meetingTo = splitTimeConversion(meeting.to);
+                if (currentDateObject.date.toDateString() === meetingDateObject.date.toDateString() && currentDateObject.time >= meetingFrom && currentDateObject.time <= meetingTo) {
+    
+                    console.log('IN if');
+                    // Current meeting is ongoing
+                    currentMeetingSection.style.backgroundColor = MEETING_STATUS.BUSY.COLOR;
+                
+                    const currentMeetingName = createElement('h3');
+                    currentMeetingName.textContent = meeting.isMeetingNameVisible ? meeting.name : MEETING_STATUS.BUSY.MESSAGE;
+                
+                    const organizedByText = createElement('p');
+                    organizedByText.textContent = `${MESSAGES.MEETING_ORGANIZED_BY} ${meeting.organizer}`;
 
-                console.log('IN if');
-                // Current meeting is ongoing
-                currentMeetingSection.style.backgroundColor = MEETING_STATUS.BUSY.COLOR;
-            
-                const currentMeetingName = createElement('h3');
-                currentMeetingName.textContent = meeting.isMeetingNameVisible ? meeting.name : MEETING_STATUS.BUSY.MESSAGE;
-            
-                const organizedByText = createElement('p');
-                organizedByText.textContent = `${MESSAGES.MEETING_ORGANIZED_BY} ${meeting.organizer}`;
-            
-                currentMeetingSection.appendChild(currentMeetingName);
-                currentMeetingSection.appendChild(organizedByText);
-            } else {
-                console.log("In else");
-                // Room is available or there are upcoming meetings
-                currentMeetingSection.style.backgroundColor = MEETING_STATUS.AVAILABLE.COLOR;
-                currentMeetingSection.textContent = MEETING_STATUS.AVAILABLE.MESSAGE;
-            
+                    const meetingTime = createElement('p');
+                    meetingTime.textContent = `${meeting.from} - ${meeting.to}`;
+                
+                    currentMeetingSection.appendChild(currentMeetingName);
+                    currentMeetingSection.appendChild(organizedByText);
+                    currentMeetingSection.appendChild(meetingTime);
+                    valueSet = true;
+                } else {
+                    console.log("In else");
+                    // Room is available or there are upcoming meetings
+                    currentMeetingSection.style.backgroundColor = MEETING_STATUS.AVAILABLE.COLOR;
+                    currentMeetingSection.textContent = MEETING_STATUS.AVAILABLE.MESSAGE;
+                
+                }       
+            }      
+        });
+        //Set upcoming meetings
+        meetingsDetails?.forEach( meeting => {
+            console.log(meeting.from.replace(":", ""), currentDateObject.time);
+            if(meeting.from.replace(":", "") > currentDateObject.time) {
                 const upcomingMeetingsContainer = createElement("div");
                 const upcomingMeetingDetailsList = createElement('ul');
             
@@ -82,9 +95,8 @@ const initializeMeetingStatus = () => {
                 upcomingMeetingsContainer.appendChild(upcomingMeetingDetailsList);
                 upcomingMeetingsSection.appendChild(upcomingMeetingsContainer);
             }
-        });
+        })
     } else {
-            console.log("ELse");
             currentMeetingSection.style.backgroundColor = MEETING_STATUS.AVAILABLE.COLOR;
             let currentMeetingName = createElement('p');
             currentMeetingName.textContent = MEETING_STATUS.AVAILABLE.MESSAGE;
@@ -110,7 +122,7 @@ const initializeMeetingStatus = () => {
         if(!isLoggedIn){
             alert('You have to login to continue booking');
         }
-        window.location.href = isLoggedIn ?  ROUTES.scheduleMeeting : ROUTES.login;
+        isLoggedIn ? routeTo(`${ROUTES.scheduleMeeting}?param=${roomName}`) : routeTo(ROUTES.login);
     });
 
 }

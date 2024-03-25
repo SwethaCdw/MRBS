@@ -17,6 +17,7 @@ body{
             overflow-x: auto;
             padding-bottom: 30px;
             .meeting-card {
+                flex: 0 0 300px;
                 @include card-styles;
                 padding: 16px;
             }

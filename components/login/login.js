@@ -1,7 +1,7 @@
 import { setItemInLocalStorage } from '../../utils/local-storage-utils.js';
 import { EVENT_LISTENERS, LOCAL_STORAGE_KEYS, LOGO } from '../../constants/common-constants.js';
 import { isValidUser, validateEmail, validatePassword } from '../../utils/validation-utils.js';
-import { getElementById, initializeUserAuth } from "../../utils/common-utils.js";
+import { getElementById, initializeUserAuth, routeTo } from "../../utils/common-utils.js";
 import { ROUTES } from "../../constants/routes-constants.js";
 
 
@@ -10,7 +10,7 @@ const initializeLogin = () => {
     
     //If user is already logged in
     if (isLoggedIn) {
-        window.location.href = ROUTES.dashboard; 
+        routeTo(ROUTES.dashboard);
     } else {
         const form = getElementById("loginForm");
         const errorElement = getElementById("error");
@@ -41,7 +41,7 @@ const initializeLogin = () => {
                 isLoggedIn = true;
                 setItemInLocalStorage(LOCAL_STORAGE_KEYS.IS_LOGGED_IN, 'true');
                 setItemInLocalStorage(LOCAL_STORAGE_KEYS.USERNAME, username);
-                window.location.href = ROUTES.dashboard;
+                routeTo(ROUTES.dashboard);
             } else {
                 errorElement.style.visibility = "visible";        
             }
@@ -50,7 +50,7 @@ const initializeLogin = () => {
         //When clicked on view rooms
         const viewRooms = getElementById("view-rooms");
         viewRooms.addEventListener(EVENT_LISTENERS.CLICK, function() {
-            window.location.href = ROUTES.meetingRooms;
+            routeTo(ROUTES.meetingRooms);
         });
 
     }

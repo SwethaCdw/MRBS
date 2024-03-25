@@ -17,7 +17,7 @@
 }
 .meeting-status-container #upcoming-meetings div {
   list-style: none;
-  padding: 20px;
+  padding: 15px 20px 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,7 +30,6 @@
   width: 80%;
   background-color: white;
   border-radius: 5px;
-  margin-bottom: 10px;
   padding: 10px;
   color: #3f7776;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -39,6 +38,7 @@
   padding: 30px;
 }
 .meeting-status-container #upcoming-meetings #book-button {
+  display: block;
   border: none;
   border-radius: 4px;
   padding: 10px 20px;
@@ -46,9 +46,13 @@
   background-color: #3f7776;
   color: #ffffff;
   box-shadow: 0 2px 4px #3f7776;
+  transition: background-color 0.3s ease;
   position: fixed;
   bottom: 10px;
   right: 10px;
+}
+.meeting-status-container #upcoming-meetings #book-button :hover {
+  background-color: #45a049;
 }
 .meeting-status-container #current-meeting {
   display: flex;
@@ -61,6 +65,7 @@
   flex: 1 1 50%;
   background-color: #8d0000;
   color: white;
+  gap: 10px;
 }
 .meeting-status-container .room-details {
   width: 100%;

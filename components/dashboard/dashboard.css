@@ -16,6 +16,7 @@ body .dashboard-container #my-meetings {
   padding-bottom: 30px;
 }
 body .dashboard-container #my-meetings .meeting-card {
+  flex: 0 0 300px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   margin-bottom: 20px;

@@ -31,6 +31,7 @@ body {
                 padding: 10px 0;
     
                 input {
+                    width: 40vw;
                     @include form-input;
                   }
                
@@ -43,7 +44,6 @@ body {
             @include button-style;
         
             &[type="submit"] {
-                margin-top: 20px;
                 width: 100%;
             
                 &:hover {
