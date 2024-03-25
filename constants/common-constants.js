@@ -4,27 +4,6 @@ export const LOCAL_STORAGE_KEYS = {
     REGISTERED_USERS : 'registeredUsers'
 }
 
-export const MEETING_UTILITIES = {
-    WIFI: {
-        icon: 'fa-wifi',
-        utility: 'SiriusGuest'
-    },
-    WHITEBOARD: {
-        icon: 'fa-chalkboard-user',
-        utility: 'White Board'
-    },
-    MONITOR: {
-        icon: 'fa-desktop',
-        utility: '15 inch Monitor'
-    }
-};
-
-export const MEETING_INFO_ICON = {
-    ORGANIZER : 'fa-user',
-    ROOM : 'fa-location-dot',
-    TIME : 'fa-clock'
-}
-
 export const LOGO = "https://github.com/SwethaCdw/image/blob/main/logo%201.png?raw=true";
 
 export const EVENT_LISTENERS = {
@@ -32,8 +11,6 @@ export const EVENT_LISTENERS = {
     CLICK : "click",
     INPUT : "input"
 }
-
-export const NO_UPCOMING_MEETINGS = 'No upcoming meetings.';
 
 export const MESSAGES = {
     START_TIME_GREATER: 'Start Time is greater than End Time',
@@ -43,13 +20,6 @@ export const MESSAGES = {
     BOOK_A_ROOM: 'Book a Room'
 }
 
-export const MEETING_STATUS= {
-    BUSY: {
-        COLOR: '#8d0000',
-        MESSAGE: 'Confidential Meeting'
-    },
-    AVAILABLE: {
-        COLOR: '#008d00',
-        MESSAGE: 'Room is Available'
-    } 
-}
+export const REFRESH_TIME = 10000;
+
+export const ITEMS_PER_PAGE = 2;

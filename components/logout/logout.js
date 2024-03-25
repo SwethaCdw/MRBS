@@ -5,10 +5,18 @@ import { removeItemFromLocalStorage } from "../../utils/local-storage-utils.js";
 
 
 export const logout = () => {
-    let { isLoggedIn } = initializeUserAuth();
-    isLoggedIn = false;
-    removeItemFromLocalStorage(LOCAL_STORAGE_KEYS.IS_LOGGED_IN);
-    removeItemFromLocalStorage(LOCAL_STORAGE_KEYS.USERNAME);
-    routeTo(ROUTES.login);
-    alert('Logout Successful');
+    try {
+        let { isLoggedIn } = initializeUserAuth();
+        isLoggedIn = false;
+
+        // Remove login-related items from local storage
+        removeItemFromLocalStorage(LOCAL_STORAGE_KEYS.IS_LOGGED_IN);
+        removeItemFromLocalStorage(LOCAL_STORAGE_KEYS.USERNAME);
+
+        // Redirect to the login page
+        routeTo(ROUTES.login);
+        alert('Logout Successful');
+    } catch (error) {
+        console.error('Error occurred in logout:', error);
+    }
 };

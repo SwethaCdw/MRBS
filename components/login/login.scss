@@ -32,16 +32,11 @@ body {
     
                 input {
                     width: 40vw;
-                    @include form-input;
-                  }
+                }
                
-            }
-            .error {
-                @include error-style;
             }
         }
         button {
-            @include button-style;
         
             &[type="submit"] {
                 width: 100%;

@@ -1,26 +1,13 @@
 @import '../colors/colors.scss';
 
+// Mixin for centering content horizontally and vertically
 @mixin center-content {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-@mixin button-style {
-  display: block;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  cursor: pointer;
-  background-color: $primary-color;
-  color: $text-color;
-  box-shadow: 0 2px 4px $primary-color;
-  transition: background-color 0.3s ease;
-  :hover{
-    background-color: $primary-button-hover-color;
-  }
-}
-
+// Mixin for creating circular elements
 @mixin circle($size, $color) {
   width: $size; 
   height: $size; 
@@ -28,11 +15,13 @@
   border-radius: 50%;
 }
 
+// Mixin for applying border-radius to all corners
 @mixin border-radius {
   border-top-left-radius: 50px; 
   border-top-right-radius: 50px; 
 }
 
+// Mixin for styling disabled buttons
 @mixin disabled-button {
   background-color: $disabled-color;
   color: $disabled-text-color;
@@ -41,47 +30,12 @@
   pointer-events: none;
 }
 
-@mixin error-style {
-  visibility: hidden;
-  color: $error-color;
-  padding: 10px;
-}
-
-@mixin form-input {
-  padding: 10px;
-  border: none;
-  background-color: transparent;
-  border-bottom: 1px solid $primary-color;
-  transition: box-shadow 0.3s;
-
-  &:focus {
-    box-shadow: 0 0 10px $box-shadow-color;
-  }
-
-  &::placeholder {
-    color: $primary-color;
-  }
-}
-
-@mixin card-styles {
+// Mixin for common card styles
+@mixin card-styles { 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   margin-bottom: 20px;
   border-radius: 8px;
   padding: 5px;
   cursor: pointer;
-}
-
-@mixin meeting-room-card-styles{
-  width: 80%;
-  background-color: white;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  padding: 10px;
-  text-align: center;
-  color: $primary-color;
-  a{
-      color: $primary-color;
-      text-decoration: none;
-  }
 }

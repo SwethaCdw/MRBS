@@ -12,7 +12,17 @@
         flex-direction: column;
         cursor: pointer;
         li{
-           @include meeting-room-card-styles;
+            width: 80%;
+            background-color: white;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+            text-align: center;
+            color: $primary-color;
+            a{
+                color: $primary-color;
+                text-decoration: none;
+            }
         }
     }
 }

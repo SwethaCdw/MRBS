@@ -41,7 +41,6 @@
       input[type="time"],
       select {
         width: 100%;
-        @include form-input;
         color: $primary-color;
       }
 
@@ -66,12 +65,8 @@
     
       button[type="submit"] {
         width: 100%;
-        @include button-style;
       }
 
-      #error {
-        @include error-style;
-      }
     }
   }
 
