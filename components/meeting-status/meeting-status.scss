@@ -11,6 +11,9 @@
         width: 100%;
         height: $max-viewport-height;
         background-color: $background-color;
+        .upcoming-meetings-heading{
+            padding: 20px 20px 0;
+        }
         #upcoming-meetings{
             width: 100%;
             height: auto;
@@ -33,7 +36,7 @@
                 }  
             } 
             .no-upcoming-meetings{
-                padding: 30px;
+                padding: 20px;
             }
         }
     

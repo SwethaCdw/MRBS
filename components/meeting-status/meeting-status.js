@@ -6,7 +6,7 @@ import { getMeetingDetails } from '../../utils/meeting-utils.js';
 import { removeCompletedMeeting } from '../scheduler/scheduler.js';
 import { ROUTES } from '../../constants/routes-constants.js';
 import { getCurrentDateAndTime, splitTimeConversion } from '../../utils/time-utils.js';
-import { initializePagination } from '../pagination/pagination.js';
+import { initializePaginationForUpcomingMeetings } from '../pagination/pagination.js';
 
 const getRoomAmenities = (meetingRooms, roomName) => meetingRooms.find(room => room.name === roomName);
 
@@ -46,27 +46,27 @@ const initializeMeetingStatus = () => {
                     if (currentDateObject.date.toDateString() === meetingDateObject.date.toDateString() && currentDateObject.time >= meetingFrom && currentDateObject.time <= meetingTo) {
                         // Display ongoing meeting
                         currentMeetingSection.style.backgroundColor = MEETING_STATUS.BUSY.COLOR;
-                        const currentMeetingName = createElement('h3');
-                        currentMeetingName.textContent = meeting.isMeetingNameVisible ? meeting.name : MEETING_STATUS.BUSY.MESSAGE;
+                        let statusMessage = getElementById('status-message');
+                        statusMessage.textContent = meeting.isMeetingNameVisible ? meeting.name : MEETING_STATUS.BUSY.MESSAGE;
                         const organizedByText = createElement('p');
                         organizedByText.textContent = `${MESSAGES.MEETING_ORGANIZED_BY} ${meeting.organizer}`;
                         const meetingTime = createElement('p');
                         meetingTime.textContent = `${meeting.from} - ${meeting.to}`;
-                        currentMeetingSection.appendChild(currentMeetingName);
                         currentMeetingSection.appendChild(organizedByText);
                         currentMeetingSection.appendChild(meetingTime);
                         valueSet = true;
                     } else {
                         // Display available
                         currentMeetingSection.style.backgroundColor = MEETING_STATUS.AVAILABLE.COLOR;
-                        currentMeetingSection.textContent = MEETING_STATUS.AVAILABLE.MESSAGE;
+                        let statusMessage = getElementById('status-message');
+                        statusMessage.textContent = MEETING_STATUS.AVAILABLE.MESSAGE;
                     }
                 }
             });
 
             // Initialize pagination for upcoming meetings
             const paginationContainer = getElementById('pagination-container');
-            initializePagination(meetingsDetails, upcomingMeetingsSection, paginationContainer);
+            initializePaginationForUpcomingMeetings(meetingsDetails, upcomingMeetingsSection, paginationContainer);
         } else {
             // Display message when no upcoming meetings
             currentMeetingSection.style.backgroundColor = MEETING_STATUS.AVAILABLE.COLOR;
@@ -88,7 +88,7 @@ const initializeMeetingStatus = () => {
         bookingRoomButton.textContent = MESSAGES.BOOK_A_ROOM;
         bookingRoomButton.id = 'book-button';
         meetingStatusContainer.appendChild(bookingRoomButton);
-        bookingRoomButton.addEventListener(EVENT_LISTENERS.CLICK, function() {
+        bookingRoomButton.addEventListener(EVENT_LISTENERS.CLICK, () => {
             if (!isLoggedIn) {
                 alert('You have to login to continue booking');
             }

@@ -9,6 +9,9 @@
   height: 100vh;
   background-color: #f8f1f1;
 }
+.meeting-status-container .upcoming-meetings-heading {
+  padding: 20px 20px 0;
+}
 .meeting-status-container #upcoming-meetings {
   width: 100%;
   height: auto;
@@ -34,7 +37,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .meeting-status-container #upcoming-meetings .no-upcoming-meetings {
-  padding: 30px;
+  padding: 20px;
 }
 .meeting-status-container #current-meeting {
   display: flex;

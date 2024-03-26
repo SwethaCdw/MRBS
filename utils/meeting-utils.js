@@ -40,9 +40,9 @@ export const checkAvailabilityOfRoom = (roomName, requestMeetingInfo) => {
             const startTimeObject = getTimeObject(meeting.date, meeting.from);
             // Check if the requested meeting time overlaps with any existing meeting
             if (requestedTimeObject < endTimeObject && requestedTimeObject > startTimeObject) {
-                // Set the room as booked and exit the loop
+                // Set the room as booked and exit the loo  p
                 isRoomBooked = true;
-                return;
+                return isRoomBooked;
             }
         });
         return isRoomBooked;

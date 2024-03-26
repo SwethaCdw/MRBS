@@ -37,7 +37,7 @@ const initializeLogin = () => {
             passwordInput.addEventListener(EVENT_LISTENERS.INPUT, toggleLoginButton);
 
             // Add submit event listener to login form
-            form.addEventListener(EVENT_LISTENERS.SUBMIT, function(event) {
+            form.addEventListener(EVENT_LISTENERS.SUBMIT, (event) => {
                 event.preventDefault();
                 // Get username and password from form inputs
                 username = form.username.value;
@@ -55,7 +55,7 @@ const initializeLogin = () => {
 
             // Add click event listener to "view rooms" link
             const viewRooms = getElementById("view-rooms");
-            viewRooms.addEventListener(EVENT_LISTENERS.CLICK, function() {
+            viewRooms.addEventListener(EVENT_LISTENERS.CLICK, () => {
                 routeTo(ROUTES.meetingRooms);
             });
         }

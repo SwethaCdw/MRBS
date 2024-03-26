@@ -3,10 +3,10 @@ import { meetingRooms } from "../../services/meeting-rooms-service.js";
 import { getUserData } from "../../services/user-service.js";
 import { getElementById, getParameterByName, initializeDropdownOptions, initializeUserAuth, routeTo, setHeaderSection } from "../../utils/common-utils.js";
 import { checkAvailabilityOfRoom } from "../../utils/meeting-utils.js";
-import { isFromTimeLessThanToTime, isTimeGreaterThanCurrentTime } from "../../utils/time-utils.js";
 import { ROUTES } from "../../constants/routes-constants.js";
 import { EVENT_LISTENERS, MESSAGES } from "../../constants/common-constants.js";
 import { getItemFromLocalStorage, setItemInLocalStorage } from "../../utils/local-storage-utils.js";
+import { isDateTimeLessThanCurrent, isFromTimeLessThanToTime } from "../../utils/time-utils.js";
 
 /**
  * Initializes the meeting form.
@@ -88,25 +88,27 @@ const extractMeetingFormData = (form) => {
           organizerId: organizerId,
           isMeetingNameVisible: isMeetingNameVisible,
           isMeetingCompleted: false
-      };
+        };
 
-      //Check if time is valid
-      const isTimeValid = isFromTimeLessThanToTime(startTime, endTime) && isTimeGreaterThanCurrentTime(startTime, meetingDate);
-      if (isTimeValid) {
-          const error = getElementById('error');
-          error.textContent = MESSAGES.START_TIME_GREATER;
-          error.style.visibility = 'visible';
-          return null;
-      }
+        //Check if time is valid
+        const isDateTimeValid = isDateTimeLessThanCurrent(startTime, meetingDate);
+        if (isDateTimeValid) {
+            setErrorValue(MESSAGES.DATE_TIME_GREATER);
+            return null;
+        }
 
-      //Check availability of room
-      const isRoomBooked = checkAvailabilityOfRoom(meetingRoom, meetingData);
-      if (isRoomBooked) {
-          const error = getElementById('error');
-          error.textContent = MESSAGES.MEETING_ALREADY_BOOKED;
-          error.style.visibility = 'visible';
-          return null;
-      }
+        const isTimeValidation =  isFromTimeLessThanToTime(startTime, endTime);
+        if (!isTimeValidation) {
+            setErrorValue(MESSAGES.START_TIME_GREATER);
+            return null;
+        }
+
+        //Check availability of room
+        const isRoomBooked = checkAvailabilityOfRoom(meetingRoom, meetingData);
+        if (isRoomBooked) {
+            setErrorValue(MESSAGES.MEETING_ALREADY_BOOKED);
+            return null;
+        }
 
       return meetingData;
   } catch (error) {
@@ -129,6 +131,11 @@ const storeMeetingData = (meetingData) => {
   }
 };
 
+const setErrorValue = (textContent) => {
+    const error = getElementById('error');
+    error.textContent = textContent;
+    error.style.visibility = 'visible';
+}
 
 const { isLoggedIn } = initializeUserAuth();
 isLoggedIn ? initializeMeetingForm() : routeTo(ROUTES.login);

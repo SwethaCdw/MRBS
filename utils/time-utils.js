@@ -33,34 +33,24 @@ export const isFromTimeLessThanToTime = (startTime, endTime) => {
         // Split the start time and end time strings into hours and minutes
         const [startHour, startMinute] = startTime.split(":").map(Number);
         const [endHour, endMinute] = endTime.split(":").map(Number);
-        
-        return startHour > endHour || (startHour === endHour && startMinute > endMinute);
+        return startHour < endHour || (startHour === endHour && startMinute < endMinute);
     } catch (error) {
         console.error('Error occurred during time comparison:', error);
         return false;
     }
 }
 
-/**
- * Checks if the specified time is greater than the current time and Date is equal to the current date
- * @param time - The time string in the format "HH:MM".
- * @param date - The date string or Date object representing the date.
- * @returns True if the specified time is greater than the current time, otherwise false.
- */
-export const isTimeGreaterThanCurrentTime = (time, date) => {
-    try {
-        // Convert the time string and date string to a Date object
-        let timeObject = getTimeObject(date, time);
-        let convertedDateObject = getCurrentDateAndTime();
-        
-        // Check if the specified date is the current date and if the specified time is greater than the current time
-        let isTimeGreaterThanCurrentTime = date === new Date() && timeObject.time > convertedDateObject.time ? true : false;
-        return isTimeGreaterThanCurrentTime;
-    } catch (error) {
-        console.error('Error occurred during time comparison:', error);
-        return false;
-    }
-}
+export const isDateTimeLessThanCurrent = (givenTime, givenDate) => {
+    // Get the current date and time
+    const currentDate = new Date();
+    
+    // Convert the given date and time to a JavaScript Date object
+    const givenDateTime = new Date(`${givenDate}T${givenTime}`);
+    
+    // Compare the given date and time with the current date and time
+    return givenDateTime < currentDate;
+};
+
 /**
  * Get current date and time
  * @param {*} date 

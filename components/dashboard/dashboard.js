@@ -37,7 +37,7 @@ const initializeDashboard = () => {
 
         //Icon for moving to schedule form
         const floatingIconElement = getElementById('floating-icon');
-        floatingIconElement.addEventListener(EVENT_LISTENERS.CLICK, function() {
+        floatingIconElement.addEventListener(EVENT_LISTENERS.CLICK, () => {
             routeTo(ROUTES.scheduleMeeting);
         });
     } catch (error) {
@@ -139,7 +139,7 @@ const createMeetingRoomCard = (room) => {
         let meetingRoomCard = createElement('div', 'meeting-room-card');
 
         // Add click event listener to the card to navigate to meeting status page
-        meetingRoomCard.addEventListener(EVENT_LISTENERS.CLICK, function(){
+        meetingRoomCard.addEventListener(EVENT_LISTENERS.CLICK, () => {
             routeTo(`${ROUTES.meetingStatus}?param=${room.name}`);
         });
 

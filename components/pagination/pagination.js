@@ -1,7 +1,7 @@
-import { ITEMS_PER_PAGE } from "../../constants/common-constants.js";
+import { EVENT_LISTENERS, ITEMS_PER_PAGE, MESSAGES } from "../../constants/common-constants.js";
 import { MEETING_STATUS } from "../../constants/meeting-constants.js";
 import { createElement } from "../../utils/common-utils.js";
-import { getCurrentDateAndTime } from "../../utils/time-utils.js";
+import { getCurrentDateAndTime, getTimeObject } from "../../utils/time-utils.js";
 
 /**
  * Initialize pagination for displaying meetings.
@@ -9,7 +9,7 @@ import { getCurrentDateAndTime } from "../../utils/time-utils.js";
  * @param  upcomingMeetingsSection - Container for displaying upcoming meetings.
  * @param  paginationContainer - Container for pagination links.
  */
-export function initializePagination(meetingsDetails, upcomingMeetingsSection, paginationContainer) {
+export const initializePaginationForUpcomingMeetings = (meetingsDetails, upcomingMeetingsSection, paginationContainer) => {
     const currentDateObject = getCurrentDateAndTime();
     const itemsPerPage = ITEMS_PER_PAGE; 
     let currentPage = 1;
@@ -18,16 +18,23 @@ export function initializePagination(meetingsDetails, upcomingMeetingsSection, p
      * Display meetings for the specified page.
      * @param page - Page number to display.
      */
-    function displayMeetings(page) {
+    const displayMeetings = (page) => {
         const startIndex = (page - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
-        let meetings = meetingsDetails.filter(meeting => {
+        let upcomingMeetings = meetingsDetails.filter(meeting => {
             if(meeting.from.replace(":", "") > currentDateObject.time) {
                 return meeting;
             }
         });
-        const meetingsToDisplay = meetings.slice(startIndex, endIndex);
-        if(meetingsToDisplay.length == 0){
+
+        //Sort the upcoming meetings
+        upcomingMeetings = sortUpcomingMeetings(upcomingMeetings);
+
+       
+        //get the meetings to display per page
+        const meetingsToDisplayPerPage = upcomingMeetings.slice(startIndex, endIndex);
+
+        if(meetingsToDisplayPerPage.length == 0){
             let upcomingMeetingContainer = createElement('p','no-upcoming-meetings');
             upcomingMeetingContainer.textContent = MESSAGES.NO_UPCOMING_MEETINGS;
             upcomingMeetingsSection.appendChild(upcomingMeetingContainer);
@@ -37,7 +44,7 @@ export function initializePagination(meetingsDetails, upcomingMeetingsSection, p
         upcomingMeetingsSection.innerHTML = '';
 
         // Display meetings for the current page
-        meetingsToDisplay.forEach(meeting => {
+        meetingsToDisplayPerPage?.forEach(meeting => {
                 const upcomingMeetingsContainer = createElement("div");
                 const upcomingMeetingDetailsList = createElement('ul');
 
@@ -65,7 +72,7 @@ export function initializePagination(meetingsDetails, upcomingMeetingsSection, p
     /**
      * Create pagination links.
      */
-    function createPagination() {
+    const createPagination = () => {
         const pageCount = Math.ceil(meetingsDetails.length / itemsPerPage);
 
         // Clear previous pagination
@@ -78,9 +85,11 @@ export function initializePagination(meetingsDetails, upcomingMeetingsSection, p
             link.href = '#';
             link.textContent = i;
             listItem.appendChild(link);
-            paginationContainer.appendChild(listItem);
+            if(pageCount > 1){
+                paginationContainer.appendChild(listItem);
+            }
 
-            link.addEventListener('click', function(event) {
+            link.addEventListener(EVENT_LISTENERS.CLICK, (event) => {
                 event.preventDefault();
                 currentPage = i;
                 displayMeetings(currentPage);
@@ -94,7 +103,7 @@ export function initializePagination(meetingsDetails, upcomingMeetingsSection, p
      * Set the active page in pagination.
      * @param {number} page - Page number to set as active.
      */
-    function setActivePage(page) {
+    const setActivePage = (page) => {
         const links = paginationContainer.querySelectorAll('a');
         links.forEach(link => {
             link.parentElement.classList.remove('active');
@@ -102,6 +111,21 @@ export function initializePagination(meetingsDetails, upcomingMeetingsSection, p
                 link.parentElement.classList.add('active');
             }
         });
+    }
+
+    const sortUpcomingMeetings = (upcomingMeetings) => {
+        upcomingMeetings.sort((a, b) => {
+            // Compare dates first
+            const dateComparison = new Date(a.date) - new Date(b.date);
+            if (dateComparison !== 0) {
+                return dateComparison;
+            }
+        
+            // If dates are the same, compare times
+            const timeComparison = getTimeObject(a.date, a.from) - getTimeObject(b.date, b.from);
+            return timeComparison;
+        });
+        return upcomingMeetings;
     }
 
     // Call the functions to initialize pagination

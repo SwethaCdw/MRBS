@@ -13,6 +13,7 @@ export const EVENT_LISTENERS = {
 }
 
 export const MESSAGES = {
+    DATE_TIME_GREATER: 'Date/Time is before the current date/time',
     START_TIME_GREATER: 'Start Time is greater than End Time',
     MEETING_ALREADY_BOOKED: 'Meeting room is already book for the requested time',
     NO_UPCOMING_MEETINGS: 'No upcoming meetings',
