@@ -21,7 +21,7 @@ const initializeMeetingStatus = () => {
         setHeaderSection(header);
 
         // Get the room name from URL parameters
-        const roomName = getParameterByName('param');
+        const roomName = getParameterByName('room');
         const meetingRoomName = getElementById('room-name');
         meetingRoomName.textContent = roomName;
 
@@ -92,7 +92,7 @@ const initializeMeetingStatus = () => {
             if (!isLoggedIn) {
                 alert('You have to login to continue booking');
             }
-            isLoggedIn ? routeTo(`${ROUTES.scheduleMeeting}?param=${roomName}`) : routeTo(ROUTES.login);
+            isLoggedIn ? routeTo(`${ROUTES.scheduleMeeting}?room=${roomName}`) : routeTo(ROUTES.login);
         });
     } catch (error) {
         console.error('Error occurred in initializeMeetingStatus:', error);

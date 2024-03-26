@@ -12,7 +12,7 @@ p, a {
 }
 body {
     font-family: 'Roboto', sans-serif;
-    min-height: 100vh;
+    min-height: $max-viewport-height;
     color: $primary-color;
 }
 header {
@@ -81,7 +81,7 @@ form {
 }
 
 #pagination-container {
-    margin-bottom: 20px;
+    margin-bottom: 45px;
     display: flex;
     justify-content: center;
     list-style: none;

@@ -1,5 +1,5 @@
 import { EVENT_LISTENERS, ITEMS_PER_PAGE, MESSAGES } from "../../constants/common-constants.js";
-import { MEETING_STATUS } from "../../constants/meeting-constants.js";
+import { MEETING_INFO_ICON, MEETING_STATUS } from "../../constants/meeting-constants.js";
 import { createElement } from "../../utils/common-utils.js";
 import { getCurrentDateAndTime, getTimeObject } from "../../utils/time-utils.js";
 
@@ -14,6 +14,12 @@ export const initializePaginationForUpcomingMeetings = (meetingsDetails, upcomin
     const itemsPerPage = ITEMS_PER_PAGE; 
     let currentPage = 1;
 
+    let upcomingMeetings = meetingsDetails.filter(meeting => {
+        if(meeting.from.replace(":", "") > currentDateObject.time) {
+            return meeting;
+        }
+    });
+
     /**
      * Display meetings for the specified page.
      * @param page - Page number to display.
@@ -21,59 +27,50 @@ export const initializePaginationForUpcomingMeetings = (meetingsDetails, upcomin
     const displayMeetings = (page) => {
         const startIndex = (page - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
-        let upcomingMeetings = meetingsDetails.filter(meeting => {
-            if(meeting.from.replace(":", "") > currentDateObject.time) {
-                return meeting;
-            }
-        });
-
-        //Sort the upcoming meetings
-        upcomingMeetings = sortUpcomingMeetings(upcomingMeetings);
-
        
-        //get the meetings to display per page
-        const meetingsToDisplayPerPage = upcomingMeetings.slice(startIndex, endIndex);
 
-        if(meetingsToDisplayPerPage.length == 0){
+        if(upcomingMeetings.length === 0){
             let upcomingMeetingContainer = createElement('p','no-upcoming-meetings');
             upcomingMeetingContainer.textContent = MESSAGES.NO_UPCOMING_MEETINGS;
             upcomingMeetingsSection.appendChild(upcomingMeetingContainer);
+            return;
         }
+        //Sort the upcoming meetings
+        upcomingMeetings = sortUpcomingMeetings(upcomingMeetings);
+
+        //get the meetings to display per page
+        const meetingsToDisplayPerPage = upcomingMeetings.slice(startIndex, endIndex);
 
         // Clear previous meetings
         upcomingMeetingsSection.innerHTML = '';
 
-        // Display meetings for the current page
-        meetingsToDisplayPerPage?.forEach(meeting => {
-                const upcomingMeetingsContainer = createElement("div");
+            // Display meetings for the current page
+            meetingsToDisplayPerPage.forEach(meeting => {
                 const upcomingMeetingDetailsList = createElement('ul');
-
-                const upcomingMeetingItems = [
-                    { title: meeting.isMeetingNameVisible ? meeting.name :  MEETING_STATUS.BUSY.MESSAGE },
-                    { details: meeting.organizer },
-                    { details: `${meeting.from}-${meeting.to}` }
-                ];
-                upcomingMeetingItems.forEach(item => {
-                    const title = createElement('h4');
-                    title.textContent = item.title;
-
-                    const listItem = createElement('li');
-                    listItem.textContent = item.details;
-
-                    upcomingMeetingDetailsList.appendChild(title);
-                    upcomingMeetingDetailsList.appendChild(listItem);
-                });
-
+            
+                const title = createElement('h4');
+                title.textContent = meeting.isMeetingNameVisible ? meeting.name : MEETING_STATUS.BUSY.MESSAGE;
+                upcomingMeetingDetailsList.appendChild(title);
+            
+                const organizerListItem = createElement('li');
+                organizerListItem.innerHTML = `<i class="fa-solid ${MEETING_INFO_ICON.ORGANIZER}"></i> ${meeting.organizer}`;
+                upcomingMeetingDetailsList.appendChild(organizerListItem);
+            
+                const timeListItem = createElement('li');
+                timeListItem.innerHTML = `<i class="fa-solid ${MEETING_INFO_ICON.TIME}"></i>  ${meeting.from} - ${meeting.to}`;
+                upcomingMeetingDetailsList.appendChild(timeListItem);
+            
+                const upcomingMeetingsContainer = createElement("div");
                 upcomingMeetingsContainer.appendChild(upcomingMeetingDetailsList);
                 upcomingMeetingsSection.appendChild(upcomingMeetingsContainer);
-        });
+            });
     }
 
     /**
      * Create pagination links.
      */
     const createPagination = () => {
-        const pageCount = Math.ceil(meetingsDetails.length / itemsPerPage);
+        const pageCount = Math.ceil(upcomingMeetings.length / itemsPerPage);
 
         // Clear previous pagination
         paginationContainer.innerHTML = '';

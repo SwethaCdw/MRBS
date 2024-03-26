@@ -15,7 +15,7 @@ import { isDateTimeLessThanCurrent, isFromTimeLessThanToTime } from "../../utils
  */
 const initializeMeetingForm = () => {
   try {
-      const roomName = getParameterByName('param');
+      const roomName = getParameterByName('room');
 
       // Set header section if user is logged in
       let header = getElementById('header');
@@ -39,22 +39,25 @@ const initializeMeetingForm = () => {
 
 /**
  * Handles the submission of the meeting form.
- * @param {Event} event - The event object.
+ * @param event - The event object.
  */
 const handleFormSubmission = (event) => {
-  try {
-      event.preventDefault();
-      const form = getElementById('meetingForm');
-      const meetingData = extractMeetingFormData(form);
-
-      if (meetingData) {
-          storeMeetingData(meetingData);
-          form.reset();
-          routeTo(ROUTES.meetingRooms);
-      }
-  } catch (error) {
-      console.error('Error occurred during form submission handling:', error);
-  }
+    const { isLoggedIn } = initializeUserAuth();
+    if(isLoggedIn){
+        try {
+            event.preventDefault();
+            const form = getElementById('meetingForm');
+            const meetingData = extractMeetingFormData(form);
+        
+            if (meetingData) {
+                storeMeetingData(meetingData);
+                form.reset();
+                routeTo(ROUTES.meetingRooms);
+            }
+        } catch (error) {
+            console.error('Error occurred during form submission handling:', error);
+        }
+    }
 };
 
 /**

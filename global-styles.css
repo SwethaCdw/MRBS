@@ -80,7 +80,7 @@ form input::placeholder, form select::placeholder {
 }
 
 #pagination-container {
-  margin-bottom: 20px;
+  margin-bottom: 45px;
   display: flex;
   justify-content: center;
   list-style: none;

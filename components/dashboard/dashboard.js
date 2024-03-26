@@ -1,12 +1,11 @@
 import { EVENT_LISTENERS, MESSAGES, REFRESH_TIME } from "../../constants/common-constants.js";
 import { MEETING_INFO_ICON} from "../../constants/meeting-constants.js";
-import { getElementById, initializeUserAuth, createElement, routeTo } from "../../utils/common-utils.js";
+import { getElementById, initializeUserAuth, createElement, routeTo, setHeaderSection } from "../../utils/common-utils.js";
 import { meetingRooms } from "../../services/meeting-rooms-service.js";
-import { headerComponent } from "../header/header.js";
 import { ROUTES } from "../../constants/routes-constants.js";
 import { getItemFromLocalStorage } from "../../utils/local-storage-utils.js";
 import { removeCompletedMeeting } from "../scheduler/scheduler.js";
-import { checkAvailabilityOfRoom } from "../../utils/meeting-utils.js";
+import { checkAvailabilityOfRoom, filterMeetingsByUserName } from "../../utils/meeting-utils.js";
 
 
 /**
@@ -23,11 +22,10 @@ const initializeDashboard = () => {
 
         //Get header component
         let header = getElementById('header');
-        header.appendChild(headerComponent());
-        header.style.padding = '10px';
+        setHeaderSection(header);
 
         //Filter meetings based on username
-        const filteredMeetings = filterMeetingsByName(meetings, username)?.filter(meeting => !meeting.isMeetingCompleted);
+        const filteredMeetings = filterMeetingsByUserName(meetings, username)?.filter(meeting => !meeting.isMeetingCompleted);
 
         //Initialize Upcoming meeting cards
         initializeMeetingCards(filteredMeetings);
@@ -44,10 +42,6 @@ const initializeDashboard = () => {
         console.error('Error occurred in initializeDashboard:', error);
     }
 }
-
-// Initialize meeting cards
-const filterMeetingsByName = (meetings, username) => meetings?.filter(meeting => meeting.organizerId === username);
-
 
 /**
  * Function to initialize meeting cards
@@ -106,7 +100,6 @@ const createMeetingCard = (meeting) => {
 
 const createMeetingInfoElement = (icon, meetingDetail) => `<p> <i class="fa-solid ${MEETING_INFO_ICON[icon]}"></i> ${meetingDetail} </p>`;
 
-
 /**
  * Create Meeting Rooms Container
  */
@@ -140,7 +133,7 @@ const createMeetingRoomCard = (room) => {
 
         // Add click event listener to the card to navigate to meeting status page
         meetingRoomCard.addEventListener(EVENT_LISTENERS.CLICK, () => {
-            routeTo(`${ROUTES.meetingStatus}?param=${room.name}`);
+            routeTo(`${ROUTES.meetingStatus}?room=${room.name}`);
         });
 
         // Check the availability of the room and set the status color accordingly

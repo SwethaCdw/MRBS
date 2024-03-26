@@ -12,15 +12,15 @@
         height: $max-viewport-height;
         background-color: $background-color;
         .upcoming-meetings-heading{
-            padding: 20px 20px 0;
+            padding: 10px 20px 0;
         }
         #upcoming-meetings{
             width: 100%;
             height: auto;
-            padding: 20px;
+            padding: 10px;
             div {
                 list-style: none;
-                padding: 15px 20px 0;
+                padding: 10px 20px 0;
                 @include center-content;
                 flex-direction: column;
                 width: 100%;
@@ -54,7 +54,7 @@
         .room-details{
             width: 100%;
             flex: 1 1 10%;
-            padding: 20px 20px 0;
+            padding: 10px 20px 0;
             #room-name{
                 padding-bottom: 10px;
             }
@@ -80,6 +80,11 @@
             
             }
 
+        }
+        #book-button {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
 }
 

@@ -16,7 +16,7 @@ const initializeMeetingRoomsList = () => {
             const meetingListItem = createElement("li");
             const meetingRoomLink = createElement("a");
             meetingRoomLink.textContent = room.name;
-            meetingRoomLink.href = `${ROUTES.meetingStatus}?param=${room.name}`;
+            meetingRoomLink.href = `${ROUTES.meetingStatus}?room=${room.name}`;
             meetingListItem.appendChild(meetingRoomLink);
             meetingList.appendChild(meetingListItem);
         });

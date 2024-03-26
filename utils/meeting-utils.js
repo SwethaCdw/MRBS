@@ -30,20 +30,32 @@ export const getMeetingDetails = (roomName) => {
 export const checkAvailabilityOfRoom = (roomName, requestMeetingInfo) => {
     try {
         const meetingDetails = getMeetingDetails(roomName);
-        // Get the time object for the requested meeting
-        let requestedTimeObject = requestMeetingInfo ? getTimeObject(requestMeetingInfo.date, requestMeetingInfo.from) : new Date();
         let isRoomBooked = false;
+
         // Iterate through each meeting detail to check for overlap
         meetingDetails?.forEach(meeting => {
-            // Get time objects for start and end times of the current meeting
+            // Get time objects for start and end times of meetings
             const endTimeObject = getTimeObject(meeting.date, meeting.to);
             const startTimeObject = getTimeObject(meeting.date, meeting.from);
-            // Check if the requested meeting time overlaps with any existing meeting
-            if (requestedTimeObject < endTimeObject && requestedTimeObject > startTimeObject) {
-                // Set the room as booked and exit the loo  p
-                isRoomBooked = true;
-                return isRoomBooked;
+
+            if(requestMeetingInfo){
+                // Check if the requested meeting time overlaps with any existing meeting
+                let requestedfromObject = getTimeObject(requestMeetingInfo.date, requestMeetingInfo.from);
+                let requestedtoObject = getTimeObject(requestMeetingInfo.date, requestMeetingInfo.to);
+
+                if (requestedfromObject <= endTimeObject && requestedfromObject >= startTimeObject || requestedtoObject >= startTimeObject && requestedtoObject <= endTimeObject)  {
+                    // Set the room as booked
+                    isRoomBooked = true;
+                }
+            } else {
+                //check if any rooms are busy for the current time
+                const currentTime = new Date();
+                if (currentTime <= endTimeObject && currentTime >= startTimeObject)  {
+                    // Set the room as booked
+                    isRoomBooked = true;
+                }
             }
+           
         });
         return isRoomBooked;
     } catch (error) {
@@ -51,3 +63,6 @@ export const checkAvailabilityOfRoom = (roomName, requestMeetingInfo) => {
         return false;
     }
 }
+
+//Filter meetings by username
+export const filterMeetingsByUserName = (meetings, username) => meetings?.filter(meeting => meeting.organizerId === username);

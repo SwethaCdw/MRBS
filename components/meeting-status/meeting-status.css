@@ -10,16 +10,16 @@
   background-color: #f8f1f1;
 }
 .meeting-status-container .upcoming-meetings-heading {
-  padding: 20px 20px 0;
+  padding: 10px 20px 0;
 }
 .meeting-status-container #upcoming-meetings {
   width: 100%;
   height: auto;
-  padding: 20px;
+  padding: 10px;
 }
 .meeting-status-container #upcoming-meetings div {
   list-style: none;
-  padding: 15px 20px 0;
+  padding: 10px 20px 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,7 +55,7 @@
 .meeting-status-container .room-details {
   width: 100%;
   flex: 1 1 10%;
-  padding: 20px 20px 0;
+  padding: 10px 20px 0;
 }
 .meeting-status-container .room-details #room-name {
   padding-bottom: 10px;
@@ -84,4 +84,9 @@
 .meeting-status-container .room-details #room-amenities div p {
   font-size: 14px;
   padding-top: 5px;
+}
+.meeting-status-container #book-button {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }/*# sourceMappingURL=meeting-status.css.map */
