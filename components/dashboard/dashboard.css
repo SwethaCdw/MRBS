@@ -116,4 +116,13 @@ body .dashboard-container #floating-icon {
 }
 body .dashboard-container #floating-icon i {
   font-size: 24px;
+}
+body .dashboard-container #searchInput {
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 14px;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
 }/*# sourceMappingURL=dashboard.css.map */

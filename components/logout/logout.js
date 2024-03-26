@@ -14,7 +14,7 @@ export const logout = () => {
         removeItemFromLocalStorage(LOCAL_STORAGE_KEYS.USERNAME);
 
         // Redirect to the login page
-        routeTo(ROUTES.login);
+        routeTo(`${ROUTES.outerFolderPath}${ROUTES.login}`);
         alert('Logout Successful');
     } catch (error) {
         console.error('Error occurred in logout:', error);

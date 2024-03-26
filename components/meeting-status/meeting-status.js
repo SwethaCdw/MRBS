@@ -92,7 +92,7 @@ const initializeMeetingStatus = () => {
             if (!isLoggedIn) {
                 alert('You have to login to continue booking');
             }
-            isLoggedIn ? routeTo(`${ROUTES.scheduleMeeting}?room=${roomName}`) : routeTo(ROUTES.login);
+            isLoggedIn ? routeTo(`${ROUTES.outerFolderPath}${ROUTES.scheduleMeeting}?room=${roomName}`) : routeTo(`${ROUTES.outerFolderPath}${ROUTES.login}`);
         });
     } catch (error) {
         console.error('Error occurred in initializeMeetingStatus:', error);

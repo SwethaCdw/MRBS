@@ -36,7 +36,7 @@ const initializeDashboard = () => {
         //Icon for moving to schedule form
         const floatingIconElement = getElementById('floating-icon');
         floatingIconElement.addEventListener(EVENT_LISTENERS.CLICK, () => {
-            routeTo(ROUTES.scheduleMeeting);
+            routeTo(`${ROUTES.outerFolderPath}${ROUTES.scheduleMeeting}`);
         });
     } catch (error) {
         console.error('Error occurred in initializeDashboard:', error);
@@ -105,6 +105,9 @@ const createMeetingInfoElement = (icon, meetingDetail) => `<p> <i class="fa-soli
  */
 const createMeetingRoomContainer = () => {
     try {
+
+        searchForMeetingRooms();
+        
         // Create a new document fragment to hold the meeting room cards
         let meetingRoomDF = document.createDocumentFragment();
         
@@ -121,6 +124,27 @@ const createMeetingRoomContainer = () => {
     }
 }
 
+  const searchForMeetingRooms = () => {
+      // Add event listener to the search input
+      const searchInput = document.getElementById('searchInput');
+      searchInput.addEventListener(EVENT_LISTENERS.INPUT, () => {
+          // Get the search query entered by the user
+          const query = searchInput.value.toLowerCase();
+          
+          // Filter the meeting rooms based on the search query
+          const filteredRooms = meetingRooms.filter(room => room.name.toLowerCase().includes(query));              
+
+          let meetingRoomContainer = getElementById('meeting-rooms');
+            meetingRoomContainer.innerHTML = '';
+            
+            // Iterate over each meeting room
+            filteredRooms.forEach(room => {
+                let roomCard = createMeetingRoomCard(room);           
+                meetingRoomContainer.appendChild(roomCard);
+            });
+      });
+  }
+
 /**
  * Create meeting room cards
  * @param {*} room 
@@ -133,7 +157,7 @@ const createMeetingRoomCard = (room) => {
 
         // Add click event listener to the card to navigate to meeting status page
         meetingRoomCard.addEventListener(EVENT_LISTENERS.CLICK, () => {
-            routeTo(`${ROUTES.meetingStatus}?room=${room.name}`);
+            routeTo(`${ROUTES.outerFolderPath}${ROUTES.meetingStatus}?room=${room.name}`);
         });
 
         // Check the availability of the room and set the status color accordingly
@@ -175,4 +199,4 @@ const createMeetingRoomCard = (room) => {
 }
 
 const { isLoggedIn } = initializeUserAuth();
-isLoggedIn ? initializeDashboard() : routeTo(ROUTES.login);
+isLoggedIn ? initializeDashboard() : routeTo(`${ROUTES.outerFolderPath}${ROUTES.login}`);

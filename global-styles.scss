@@ -22,9 +22,7 @@ header {
       margin: 0;
     }
     nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        @include flexbox-space-between;
         flex-direction: row;
         #logo{
             width: 100px;

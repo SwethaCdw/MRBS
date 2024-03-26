@@ -56,8 +56,8 @@
 }
 .schedule-meeting-container form .time-input {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin: 15px auto;
 }
 .schedule-meeting-container form .time-input label {

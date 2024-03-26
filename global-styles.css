@@ -23,8 +23,8 @@ header h1 {
 }
 header nav {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   flex-direction: row;
 }
 header nav #logo {

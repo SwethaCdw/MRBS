@@ -16,6 +16,7 @@ export const MEETING_UTILITIES = {
 export const MEETING_INFO_ICON = {
     ORGANIZER : 'fa-user',
     ROOM : 'fa-location-dot',
+    DATE: 'fa-calendar',
     TIME : 'fa-clock'
 };
 

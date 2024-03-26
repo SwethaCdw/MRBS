@@ -52,7 +52,7 @@ const handleFormSubmission = (event) => {
             if (meetingData) {
                 storeMeetingData(meetingData);
                 form.reset();
-                routeTo(ROUTES.meetingRooms);
+                routeTo(`${ROUTES.outerFolderPath}${ROUTES.meetingRooms}`);
             }
         } catch (error) {
             console.error('Error occurred during form submission handling:', error);
@@ -141,5 +141,5 @@ const setErrorValue = (textContent) => {
 }
 
 const { isLoggedIn } = initializeUserAuth();
-isLoggedIn ? initializeMeetingForm() : routeTo(ROUTES.login);
+isLoggedIn ? initializeMeetingForm() : routeTo(`${ROUTES.outerFolderPath}${ROUTES.login}`);
 

@@ -1,8 +1,9 @@
+import { ROUTES } from "./constants/routes-constants.js";
 import { initializeUserAuth, routeTo } from "./utils/common-utils.js";
 
 const {isLoggedIn} = initializeUserAuth(); 
 if (!isLoggedIn) {
-    routeTo('./components/login/login.html');
+    routeTo(`${ROUTES.innerFolderPath}components/${ROUTES.login}`);
 } else {
-    routeTo('./components/dashboard/dashboard.html');
+    routeTo(`${ROUTES.innerFolderPath}components/${ROUTES.dashboard}`);
 }

@@ -32,9 +32,12 @@
   width: 80%;
   background-color: white;
   border-radius: 5px;
-  padding: 10px;
+  padding: 5px;
   color: #3f7776;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.meeting-status-container #upcoming-meetings div ul li {
+  padding: 2px 0;
 }
 .meeting-status-container #upcoming-meetings .no-upcoming-meetings {
   padding: 20px;
@@ -82,6 +85,7 @@
   color: #3f7776;
 }
 .meeting-status-container .room-details #room-amenities div p {
+  text-align: center;
   font-size: 14px;
   padding-top: 5px;
 }

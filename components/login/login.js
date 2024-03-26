@@ -12,7 +12,7 @@ const initializeLogin = () => {
         // Check if user is already logged in
         if (isLoggedIn) {
             // Redirect to dashboard if user is logged in
-            routeTo(ROUTES.dashboard);
+            routeTo(`${ROUTES.outerFolderPath}${ROUTES.dashboard}`);
         } else {
             // Get form and error elements
             const form = getElementById("loginForm");
@@ -47,7 +47,7 @@ const initializeLogin = () => {
                     isLoggedIn = true;
                     setItemInLocalStorage(LOCAL_STORAGE_KEYS.IS_LOGGED_IN, 'true');
                     setItemInLocalStorage(LOCAL_STORAGE_KEYS.USERNAME, username);
-                    routeTo(ROUTES.dashboard);
+                    routeTo(`${ROUTES.outerFolderPath}${ROUTES.dashboard}`);
                 } else {
                     errorElement.style.visibility = "visible";        
                 }
@@ -56,7 +56,7 @@ const initializeLogin = () => {
             // Add click event listener to "view rooms" link
             const viewRooms = getElementById("view-rooms");
             viewRooms.addEventListener(EVENT_LISTENERS.CLICK, () => {
-                routeTo(ROUTES.meetingRooms);
+                routeTo(`${ROUTES.outerFolderPath}${ROUTES.meetingRooms}`);
             });
         }
     } catch (error) {

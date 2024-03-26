@@ -39,7 +39,7 @@ export const headerComponent = () => {
             dashboardLink.href = '#';
             dashboardLink.textContent = 'Dashboard';
             dashboardLink.addEventListener(EVENT_LISTENERS.CLICK, () => {
-                routeTo(ROUTES.dashboard);
+                routeTo(`${ROUTES.outerFolderPath}${ROUTES.dashboard}`);
             });
 
             // Apply styling to links

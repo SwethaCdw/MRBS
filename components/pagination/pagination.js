@@ -15,7 +15,8 @@ export const initializePaginationForUpcomingMeetings = (meetingsDetails, upcomin
     let currentPage = 1;
 
     let upcomingMeetings = meetingsDetails.filter(meeting => {
-        if(meeting.from.replace(":", "") > currentDateObject.time) {
+        let meetingDate = getTimeObject(meeting.date, meeting.from);
+        if(meetingDate > currentDateObject.date) {
             return meeting;
         }
     });
@@ -46,6 +47,7 @@ export const initializePaginationForUpcomingMeetings = (meetingsDetails, upcomin
 
             // Display meetings for the current page
             meetingsToDisplayPerPage.forEach(meeting => {
+                const upcomingMeetingsContainer = createElement("div");
                 const upcomingMeetingDetailsList = createElement('ul');
             
                 const title = createElement('h4');
@@ -59,8 +61,11 @@ export const initializePaginationForUpcomingMeetings = (meetingsDetails, upcomin
                 const timeListItem = createElement('li');
                 timeListItem.innerHTML = `<i class="fa-solid ${MEETING_INFO_ICON.TIME}"></i>  ${meeting.from} - ${meeting.to}`;
                 upcomingMeetingDetailsList.appendChild(timeListItem);
+
+                const dateListItem = createElement('li');
+                dateListItem.innerHTML = `<i class="fa-solid ${MEETING_INFO_ICON.DATE}"></i>  ${meeting.date}`;
+                upcomingMeetingDetailsList.appendChild(dateListItem);
             
-                const upcomingMeetingsContainer = createElement("div");
                 upcomingMeetingsContainer.appendChild(upcomingMeetingDetailsList);
                 upcomingMeetingsSection.appendChild(upcomingMeetingsContainer);
             });

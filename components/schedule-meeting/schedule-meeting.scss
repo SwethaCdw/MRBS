@@ -59,9 +59,7 @@
 
 
     .time-input{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include flexbox-space-between;
       margin: 15px auto;
       label{
         width: 200px;
