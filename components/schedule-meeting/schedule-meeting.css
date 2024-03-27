@@ -1,0 +1,90 @@
+.schedule-meeting-container {
+  height: calc(100vh - 70px);
+  background-color: #f8f1f1;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.schedule-meeting-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.schedule-meeting-container form {
+  font-size: 14px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fdfeff;
+  border-radius: 5px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+}
+.schedule-meeting-container form div {
+  margin-bottom: 15px;
+}
+.schedule-meeting-container form .confidential-meeting {
+  font-family: sans-serif;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.schedule-meeting-container form .confidential-meeting label {
+  margin: 0;
+  color: #3f7776;
+}
+.schedule-meeting-container form input[type=text],
+.schedule-meeting-container form input[type=date],
+.schedule-meeting-container form input[type=time],
+.schedule-meeting-container form select {
+  width: 100%;
+  color: #3f7776;
+}
+.schedule-meeting-container form input::-moz-placeholder {
+  color: #3f7776;
+}
+.schedule-meeting-container form input::placeholder {
+  color: #3f7776;
+}
+.schedule-meeting-container form input[type=checkbox] {
+  margin-right: 5px;
+  vertical-align: middle;
+  accent-color: #3f7776;
+}
+.schedule-meeting-container form input[type=checkbox]:checked {
+  background-color: #3f7776;
+}
+.schedule-meeting-container form .time-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px auto;
+}
+.schedule-meeting-container form .time-input label {
+  width: 200px;
+}
+.schedule-meeting-container form .time-input input {
+  width: 80%;
+}
+.schedule-meeting-container form button[type=submit] {
+  width: 100%;
+}
+
+@media screen and (min-width: 421px) {
+  form {
+    width: 500px;
+  }
+  form .time-input {
+    flex-direction: row;
+    gap: 10px;
+  }
+}
+@media screen and (max-width: 420px) {
+  form {
+    width: 300px;
+  }
+  form .time-input {
+    flex-direction: column;
+    gap: 5px;
+  }
+}/*# sourceMappingURL=schedule-meeting.css.map */

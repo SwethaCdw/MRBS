@@ -1,0 +1,28 @@
+@import '../../styles/mixins/mixins.scss';
+@import '../../styles/colors/colors.scss';
+@import '../../styles/variables/variables.scss';
+
+.meeting-rooms-container{
+    #meetingRoomsList {
+        list-style: none;
+        @include center-content;
+        @include border-radius;
+        background-color: $background-color;
+        height: $header-height;
+        flex-direction: column;
+        cursor: pointer;
+        li{
+            width: 80%;
+            background-color: white;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+            text-align: center;
+            color: $primary-color;
+            a{
+                color: $primary-color;
+                text-decoration: none;
+            }
+        }
+    }
+}

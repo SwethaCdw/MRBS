@@ -1,0 +1,99 @@
+@import '../../styles/mixins/mixins.scss';
+@import '../../styles/colors/colors.scss';
+@import '../../styles/variables/variables.scss';
+
+.schedule-meeting-container {
+    height: $header-height;
+    background-color: $background-color;
+    @include border-radius;
+    @include center-content;
+  
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    form {
+      font-size: $font-size;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: $form-background;
+      border-radius: 5px;
+      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1); 
+      div {
+        margin-bottom: 15px;
+      }
+
+      .confidential-meeting{
+        font-family: sans-serif;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        label{
+            margin: 0;
+            color: $primary-color;
+        }
+      }
+  
+      input[type="text"],
+      input[type="date"],
+      input[type="time"],
+      select {
+        width: 100%;
+        color: $primary-color;
+      }
+
+      input::placeholder {
+          color: $primary-color;
+      }
+    
+      input[type="checkbox"] {
+        margin-right: 5px;
+        vertical-align: middle;
+        accent-color: $primary-color;
+        &:checked {
+          background-color: $primary-color;
+        }
+      }
+
+
+    .time-input{
+      @include flexbox-space-between;
+      margin: 15px auto;
+      label{
+        width: 200px;
+      }
+      input{
+        width: 80%;
+      }
+    }
+    
+      button[type="submit"] {
+        width: 100%;
+      }
+
+    }
+  }
+
+  @media screen and (min-width: ($mobile-device-width + 1)) {
+    form {
+      width: 500px;
+      .time-input {
+        flex-direction: row;
+        gap: 10px;
+      }
+    }
+   
+}
+
+@media screen and (max-width: $mobile-device-width) {
+    form {
+      width: 300px;
+      .time-input {
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+   
+}

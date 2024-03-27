@@ -1,0 +1,52 @@
+@import '../colors/colors.scss';
+
+// Mixin for centering content horizontally and vertically
+@mixin center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Mixin for creating circular elements
+@mixin circle($size, $color) {
+  width: $size; 
+  height: $size; 
+  background-color: $color;
+  border-radius: 50%;
+}
+
+// Mixin for applying border-radius to all corners
+@mixin border-radius {
+  border-top-left-radius: 50px; 
+  border-top-right-radius: 50px; 
+}
+
+// Mixin for styling disabled buttons
+@mixin disabled-button {
+  background-color: $disabled-color;
+  color: $disabled-text-color;
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+// Mixin for common card styles
+@mixin card-styles { 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+@mixin flexbox-space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

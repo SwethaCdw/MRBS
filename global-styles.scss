@@ -1,0 +1,129 @@
+@import './styles/mixins/mixins.scss';
+@import './styles/colors/colors.scss';
+@import './styles//variables/variables.scss';
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+p, a {
+    font-size: $font-size;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    min-height: $max-viewport-height;
+    color: $primary-color;
+}
+header {
+    background-color: white; 
+    color: $primary-color; 
+    h1 {
+      margin: 0;
+    }
+    nav {
+        @include flexbox-space-between;
+        flex-direction: row;
+        #logo{
+            width: 100px;
+            height: 40px;
+            object-fit: contain;
+        }
+        #profile-icon{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    }
+}
+
+button {
+    display: block;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: $primary-color;
+    color: $text-color;
+    box-shadow: 0 2px 4px $primary-color;
+    transition: background-color 0.3s ease;
+    :hover{
+      background-color: $primary-button-hover-color;
+    }
+}
+
+#error {
+    visibility: hidden;
+    color: $error-color;
+    padding: 10px 0;
+    font-size: $font-size;
+}
+
+form {
+    input, select{
+        padding: 10px;
+        border: none;
+        background-color: transparent;
+        border-bottom: 1px solid $primary-color;
+        transition: box-shadow 0.3s;
+
+        &:focus {
+            box-shadow: 0 0 10px $box-shadow-color;
+        }
+
+        &::placeholder {
+            color: $primary-color;
+        }
+    }
+}
+
+#pagination-container {
+    margin-bottom: 45px;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+
+    li {
+        margin: 0 5px;
+
+        a {
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            color: #333;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: #f0f0f0;
+            }
+        }
+
+        &.active a {
+            background-color: $primary-color;
+            color: #fff;
+        }
+    }
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 4px solid #3498db;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -20px;
+    margin-left: -20px;
+    display: none; /* Hide loader by default */
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

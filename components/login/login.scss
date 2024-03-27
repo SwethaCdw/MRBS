@@ -1,0 +1,73 @@
+@import '../../styles/mixins/mixins.scss';
+@import '../../styles/colors/colors.scss';
+@import '../../styles/variables/variables.scss';
+
+body {
+    main{
+        @include center-content;
+        flex-direction: column;
+        background-color: $background-color;
+        min-height: $max-viewport-height;
+        .logo-container{
+            #logo{
+                width: 150px;
+                padding-bottom: 20px;
+            }
+        } 
+        #view-rooms {
+            margin-top: 20px;
+        }
+
+        .form-container {
+            @include center-content;
+            flex-direction: column;
+            height: 100%;
+            padding: 30px;
+            background-color: $form-background;
+            box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1); 
+            #loginForm{
+                width: 100%;
+                .form-group{
+                    padding: 10px 0;
+                    width: 100%;
+        
+                    input {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        button {
+        
+            &[type="submit"] {
+                width: 100%;
+            
+                &:hover {
+                 background-color: $primary-button-hover-color;
+                }
+            
+                &:disabled {
+                 @include disabled-button;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: ($mobile-device-width + 1)) {
+    .form-container {
+        width: 400px;
+        }
+    #loginForm{
+        width: 100%;
+       
+    }
+   
+}
+
+@media screen and (max-width: $mobile-device-width) {
+    .form-container {
+        width: 300px;
+        }
+   
+}
