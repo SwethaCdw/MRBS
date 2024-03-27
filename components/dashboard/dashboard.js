@@ -1,5 +1,5 @@
 import { EVENT_LISTENERS, MESSAGES, REFRESH_TIME } from "../../constants/common-constants.js";
-import { MEETING_INFO_ICON} from "../../constants/meeting-constants.js";
+import { MEETING_INFO_ICON, MEETING_STATUS} from "../../constants/meeting-constants.js";
 import { getElementById, initializeUserAuth, createElement, routeTo, setHeaderSection } from "../../utils/common-utils.js";
 import { meetingRooms } from "../../services/meeting-rooms-service.js";
 import { ROUTES } from "../../constants/routes-constants.js";
@@ -162,7 +162,7 @@ const createMeetingRoomCard = (room) => {
 
         // Check the availability of the room and set the status color accordingly
         let roomStatus = checkAvailabilityOfRoom(room.name);
-        const statusColor = !roomStatus ? '#008f22' : '#8f0000';
+        const statusColor = !roomStatus ? MEETING_STATUS.AVAILABLE.COLOR : MEETING_STATUS.BUSY.COLOR;
 
         // Create elements for room image and status for room
         const imageContainer = createElement('div', 'image-container');

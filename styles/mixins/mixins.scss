@@ -33,7 +33,7 @@
 // Mixin for common card styles
 @mixin card-styles { 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: $form-background;
   margin-bottom: 20px;
   border-radius: 8px;
   padding: 5px;

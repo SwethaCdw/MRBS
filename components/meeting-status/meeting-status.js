@@ -91,9 +91,8 @@ const initializeMeetingStatus = () => {
 
         // Add button to book a room
         const meetingStatusContainer = document.querySelector('.meeting-status-container');
-        const bookingRoomButton = createElement('button');
+        const bookingRoomButton = createElement('button', 'book-button', 'book-button');
         bookingRoomButton.textContent = MESSAGES.BOOK_A_ROOM;
-        bookingRoomButton.id = 'book-button';
         meetingStatusContainer.appendChild(bookingRoomButton);
         bookingRoomButton.addEventListener(EVENT_LISTENERS.CLICK, () => {
             if (!isLoggedIn) {

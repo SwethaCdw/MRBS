@@ -11,10 +11,10 @@
         width: 100%;
         height: $max-viewport-height;
         background-color: $background-color;
-        #upcoming-meetings-heading{
+        .upcoming-meetings-heading{
             padding: 10px 20px 0;
         }
-        #upcoming-meetings{
+        .upcoming-meetings{
             width: 100%;
             height: auto;
             padding: 10px;
@@ -43,7 +43,7 @@
             }
         }
     
-        #current-meeting{
+        .current-meeting{
             @include center-content;
             @include border-radius;
             flex-direction: column;
@@ -51,7 +51,7 @@
             flex: 1 1 50%;
             color: white;
             gap: 10px;
-            #status-message {
+            h3 {
                 width: 80%;
                 text-align: center;
                 @include ellipsis;
@@ -66,10 +66,10 @@
             width: 100%;
             flex: 1 1 10%;
             padding: 10px 20px 0;
-            #room-name{
+            h3{
                 padding-bottom: 10px;
             }
-            #room-amenities{
+            .room-amenities{
                 width: 100%;
                 display: flex;
                 flex-direction: row;
@@ -93,7 +93,7 @@
             }
 
         }
-        #book-button {
+        .book-button {
             position: fixed;
             bottom: 0;
             width: 100%;

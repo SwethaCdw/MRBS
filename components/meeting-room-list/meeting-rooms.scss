@@ -3,7 +3,7 @@
 @import '../../styles/variables/variables.scss';
 
 .meeting-rooms-container{
-    #meetingRoomsList {
+    ul {
         list-style: none;
         @include center-content;
         @include border-radius;

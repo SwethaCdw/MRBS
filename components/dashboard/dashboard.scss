@@ -10,7 +10,7 @@ body{
         .meeting-title{
             padding-bottom: 20px;
         }
-        #my-meetings{
+        .my-meetings{
             display: flex;
             gap: 10px;
             width: 100%;
@@ -28,7 +28,7 @@ body{
                 margin: 8px 0;
             }
         }
-        #meeting-rooms {
+        .meeting-rooms {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
@@ -52,9 +52,9 @@ body{
                         position: absolute;
                         bottom: 10px;
                         left: 5px;
-                        background-color: white;
+                        background-color: $form-background;
                         padding: 3px 10px;
-                        color: #008f22;
+                        color: $available-color;
                         border-radius: 5px;
                         .text-overlay {
                             font-size: $font-size;
@@ -63,7 +63,7 @@ body{
                             width: 7px; 
                             height: 7px;
                             border-radius: 50%; 
-                            background-color: #008f22; 
+                            background-color: $available-color; 
                         }
                     }
                 }
@@ -71,7 +71,7 @@ body{
                 
             }
             &-detail {
-                background-color: white;
+                background-color: $form-background;
                 padding: 5px;
             }
             @media screen and (min-width: 768px) {
@@ -82,7 +82,7 @@ body{
         
         }
         @media screen and (max-width: 479px) {
-            #meeting-rooms {
+            .meeting-rooms {
                 flex-direction: row;
                 flex-wrap: nowrap;
                 width: 100%;
@@ -93,14 +93,14 @@ body{
             }
             
         }
-        #floating-icon {
+        .floating-icon {
             position: fixed;
             bottom: 20px; 
             right: 20px; 
             width: 50px;
             height: 50px;
             background-color: $primary-color; 
-            color: #fff; 
+            color: $text-color; 
             border-radius: 50%;
             @include center-content;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
@@ -111,13 +111,13 @@ body{
         }
 
 
-        #searchInput {
+        .searchInput {
             background-position: 10px 12px;
             background-repeat: no-repeat;
             width: 100%;
             font-size: $font-size;
             padding: 5px 10px;
-            border: 1px solid #ddd;
+            border: 1px solid $text-color;
             margin-bottom: 12px;
         }
     }
