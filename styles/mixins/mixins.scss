@@ -45,3 +45,8 @@
   align-items: center;
   justify-content: space-between;
 }
+
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

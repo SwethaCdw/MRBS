@@ -11,7 +11,10 @@ import { initializePaginationForUpcomingMeetings } from '../pagination/paginatio
 const getRoomAmenities = (meetingRooms, roomName) => meetingRooms.find(room => room.name === roomName);
 
 const initializeMeetingStatus = () => {
+    let loader = document.getElementById('loader');
+    loader.style.display = 'block';
     try {
+       
         // Set interval to periodically remove completed meetings
         setInterval(removeCompletedMeeting, REFRESH_TIME);
         const { isLoggedIn } = initializeUserAuth();
@@ -28,7 +31,8 @@ const initializeMeetingStatus = () => {
         // Get meetings details for the specified room
         let meetingsDetails = getMeetingDetails(roomName);
         meetingsDetails = meetingsDetails ? meetingsDetails.filter(meeting => !meeting.isMeetingCompleted) : meetingsDetails;
-
+        const upcomingMeetingsHeading = getElementById('upcoming-meetings-heading');
+        upcomingMeetingsHeading.textContent = 'Upcoming Meetings';
         const upcomingMeetingsSection = getElementById('upcoming-meetings');
         const currentMeetingSection = getElementById('current-meeting');
 
@@ -47,7 +51,7 @@ const initializeMeetingStatus = () => {
                         // Display ongoing meeting
                         currentMeetingSection.style.backgroundColor = MEETING_STATUS.BUSY.COLOR;
                         let statusMessage = getElementById('status-message');
-                        statusMessage.textContent = meeting.isMeetingNameVisible ? meeting.name : MEETING_STATUS.BUSY.MESSAGE;
+                        statusMessage.title = meeting.isMeetingNameVisible ? meeting.name : MEETING_STATUS.BUSY.MESSAGE;
                         const organizedByText = createElement('p');
                         organizedByText.textContent = `${MESSAGES.MEETING_ORGANIZED_BY} ${meeting.organizer}`;
                         const meetingTime = createElement('p');
@@ -60,6 +64,9 @@ const initializeMeetingStatus = () => {
                         currentMeetingSection.style.backgroundColor = MEETING_STATUS.AVAILABLE.COLOR;
                         let statusMessage = getElementById('status-message');
                         statusMessage.textContent = MEETING_STATUS.AVAILABLE.MESSAGE;
+                        statusMessage.addEventListener('mouseenter', function() {
+                            this.title = this.textContent;
+                          });
                     }
                 }
             });
@@ -96,6 +103,10 @@ const initializeMeetingStatus = () => {
         });
     } catch (error) {
         console.error('Error occurred in initializeMeetingStatus:', error);
+    } finally {
+        if (loader) {
+            loader.style.display = 'none';
+        }
     }
 };
 
@@ -118,6 +129,7 @@ const createAmenities = (amenities) => {
         console.error('Error occurred while creating room amenities:', error);
     }
 };
+
 
 initializeMeetingStatus();
 

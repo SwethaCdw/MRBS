@@ -49,9 +49,17 @@
             flex-direction: column;
             width: 100%;
             flex: 1 1 50%;
-            background-color: $busy-color;
             color: white;
             gap: 10px;
+            #status-message {
+                width: 80%;
+                text-align: center;
+                @include ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+            }
+           
 
         }
         .room-details{
