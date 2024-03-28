@@ -6,11 +6,11 @@ body main {
   background-color: #f8f1f1;
   min-height: 100vh;
 }
-body main .logo-container #logo {
+body main .logo-container .logo {
   width: 150px;
   padding-bottom: 20px;
 }
-body main #view-rooms {
+body main .view-rooms-container button {
   margin-top: 20px;
 }
 body main .form-container {
@@ -23,14 +23,14 @@ body main .form-container {
   background-color: #fdfeff;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
 }
-body main .form-container #loginForm {
+body main .form-container form {
   width: 100%;
 }
-body main .form-container #loginForm .form-group {
+body main .form-container form .form-group {
   padding: 10px 0;
   width: 100%;
 }
-body main .form-container #loginForm .form-group input {
+body main .form-container form .form-group input {
   width: 100%;
 }
 body main button[type=submit] {
@@ -51,7 +51,7 @@ body main button[type=submit]:disabled {
   .form-container {
     width: 400px;
   }
-  #loginForm {
+  form {
     width: 100%;
   }
 }

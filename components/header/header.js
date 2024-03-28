@@ -14,14 +14,14 @@ export const headerComponent = () => {
         const nav = createElement('nav');
         
         // Create logo element and set its source
-        const logo = createElement('img', null, 'logo');
+        const logo = createElement('img', 'logo', 'logo');
         logo.src = LOGO;
         nav.appendChild(logo);
 
         // Check if user is logged in
         if (isLoggedIn) {
             // Create profile icon element and click event listener
-            const profileIcon = createElement('img', null, 'profile-icon');
+            const profileIcon = createElement('img', 'profile-icon', 'profile-icon');
             profileIcon.src = loggedInUserData.profileImage;
             profileIcon.addEventListener(EVENT_LISTENERS.CLICK, () => {
                 dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';

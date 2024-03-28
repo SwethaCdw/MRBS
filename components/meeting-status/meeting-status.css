@@ -9,15 +9,15 @@
   height: 100vh;
   background-color: #f8f1f1;
 }
-.meeting-status-container #upcoming-meetings-heading {
+.meeting-status-container .upcoming-meetings-heading {
   padding: 10px 20px 0;
 }
-.meeting-status-container #upcoming-meetings {
+.meeting-status-container .upcoming-meetings {
   width: 100%;
   height: auto;
   padding: 10px;
 }
-.meeting-status-container #upcoming-meetings div {
+.meeting-status-container .upcoming-meetings div {
   list-style: none;
   padding: 10px 20px 0;
   display: flex;
@@ -27,7 +27,7 @@
   width: 100%;
   cursor: pointer;
 }
-.meeting-status-container #upcoming-meetings div ul {
+.meeting-status-container .upcoming-meetings div ul {
   list-style: none;
   width: 80%;
   background-color: white;
@@ -36,13 +36,13 @@
   color: #3f7776;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.meeting-status-container #upcoming-meetings div ul li {
+.meeting-status-container .upcoming-meetings div ul li {
   padding: 2px 0;
 }
-.meeting-status-container #upcoming-meetings .no-upcoming-meetings {
+.meeting-status-container .upcoming-meetings .no-upcoming-meetings {
   padding: 20px;
 }
-.meeting-status-container #current-meeting {
+.meeting-status-container .current-meeting {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,7 +54,7 @@
   color: white;
   gap: 10px;
 }
-.meeting-status-container #current-meeting #status-message {
+.meeting-status-container .current-meeting h3 {
   width: 80%;
   text-align: center;
   overflow: hidden;
@@ -68,21 +68,21 @@
   flex: 1 1 10%;
   padding: 10px 20px 0;
 }
-.meeting-status-container .room-details #room-name {
+.meeting-status-container .room-details h3 {
   padding-bottom: 10px;
 }
-.meeting-status-container .room-details #room-amenities {
+.meeting-status-container .room-details .room-amenities {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.meeting-status-container .room-details #room-amenities div {
+.meeting-status-container .room-details .room-amenities div {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.meeting-status-container .room-details #room-amenities div i {
+.meeting-status-container .room-details .room-amenities div i {
   width: 45px;
   height: 45px;
   background-color: white;
@@ -92,12 +92,12 @@
   align-items: center;
   color: #3f7776;
 }
-.meeting-status-container .room-details #room-amenities div p {
+.meeting-status-container .room-details .room-amenities div p {
   text-align: center;
   font-size: 14px;
   padding-top: 5px;
 }
-.meeting-status-container #book-button {
+.meeting-status-container .book-button {
   position: fixed;
   bottom: 0;
   width: 100%;

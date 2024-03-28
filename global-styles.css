@@ -15,7 +15,7 @@ body {
 }
 
 header {
-  background-color: white;
+  background-color: #fff;
   color: #3f7776;
 }
 header h1 {
@@ -27,13 +27,13 @@ header nav {
   justify-content: space-between;
   flex-direction: row;
 }
-header nav #logo {
+header nav .logo {
   width: 100px;
   height: 40px;
   -o-object-fit: contain;
      object-fit: contain;
 }
-header nav #profile-icon {
+header nav .profile-icon {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -55,7 +55,7 @@ button :hover {
   background-color: #45a049;
 }
 
-#error {
+.error {
   visibility: hidden;
   color: #ff0000;
   padding: 10px 0;
@@ -79,34 +79,33 @@ form input::placeholder, form select::placeholder {
   color: #3f7776;
 }
 
-#pagination-container {
+.pagination-container {
   margin-bottom: 45px;
   display: flex;
   justify-content: center;
   list-style: none;
   padding: 0;
 }
-#pagination-container li {
+.pagination-container li {
   margin: 0 5px;
 }
-#pagination-container li a {
+.pagination-container li a {
   text-decoration: none;
   padding: 5px 10px;
-  border: 1px solid #ccc;
   border-radius: 3px;
-  color: #333;
+  color: #3f7776;
   transition: background-color 0.3s ease;
 }
-#pagination-container li a:hover {
-  background-color: #f0f0f0;
+.pagination-container li a:hover {
+  background-color: #fdfeff;
 }
-#pagination-container li.active a {
+.pagination-container li.active a {
   background-color: #3f7776;
-  color: #fff;
+  color: #ffffff;
 }
 
 .loader {
-  border: 4px solid #f3f3f3;
+  border: 4px solid #fdfeff;
   border-radius: 50%;
   border-top: 4px solid #3498db;
   width: 40px;
@@ -117,7 +116,7 @@ form input::placeholder, form select::placeholder {
   left: 50%;
   margin-top: -20px;
   margin-left: -20px;
-  display: none; /* Hide loader by default */
+  display: none;
 }
 
 @keyframes spin {

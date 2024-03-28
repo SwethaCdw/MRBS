@@ -1,4 +1,4 @@
-.meeting-rooms-container #meetingRoomsList {
+.meeting-rooms-container ul {
   list-style: none;
   display: flex;
   justify-content: center;
@@ -10,7 +10,7 @@
   flex-direction: column;
   cursor: pointer;
 }
-.meeting-rooms-container #meetingRoomsList li {
+.meeting-rooms-container ul li {
   width: 80%;
   background-color: white;
   border-radius: 5px;
@@ -19,7 +19,7 @@
   text-align: center;
   color: #3f7776;
 }
-.meeting-rooms-container #meetingRoomsList li a {
+.meeting-rooms-container ul li a {
   color: #3f7776;
   text-decoration: none;
 }/*# sourceMappingURL=meeting-rooms.css.map */

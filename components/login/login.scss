@@ -9,13 +9,15 @@ body {
         background-color: $background-color;
         min-height: $max-viewport-height;
         .logo-container{
-            #logo{
+            .logo{
                 width: 150px;
                 padding-bottom: 20px;
             }
         } 
-        #view-rooms {
-            margin-top: 20px;
+        .view-rooms-container {
+            button{
+                margin-top: 20px;
+            }
         }
 
         .form-container {
@@ -25,7 +27,7 @@ body {
             padding: 30px;
             background-color: $form-background;
             box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1); 
-            #loginForm{
+            form{
                 width: 100%;
                 .form-group{
                     padding: 10px 0;
@@ -58,7 +60,7 @@ body {
     .form-container {
         width: 400px;
         }
-    #loginForm{
+    form{
         width: 100%;
        
     }

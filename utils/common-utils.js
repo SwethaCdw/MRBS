@@ -8,10 +8,9 @@ import { headerComponent } from "../components/header/header.js";
  * @returns The value of the parameter if found, or an empty string if not found.
  */
 export const getParameterByName = (name) => {
-    name = name.replace(/[[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    const regex = new RegExp(`[?&]${name}=([^&#]*)`);
+    const results = regex.exec(location.search);
+    return results ? decodeURIComponent(results[1].replace(/\+/g, " ")) : "";
 }
 
 /**
